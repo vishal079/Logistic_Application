@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="align-items-center justify-content-between mb-1">
+        <div class="row">
+            <div class="col-md-2">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            </div>
+            <div class="col-md-10">
+                <div class="well well-lg card card-block card-header flex-row" style="overflow: visible !important;">
+                    <div class="col-md-1">
+                        <label for="">Filter by:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control-sm" id="filterTyp" name="filterTyp" #filterTyp="ngModel"
+                            [(ngModel)]="filterType" [value]='filterType' style="width: 98%">
+                            <option [ngValue]="0" value="0">Today</option>
+                            <option [ngValue]="1" value="1">This Month</option>
+                            <option [ngValue]="2" value="2">Till Date</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-sm" style="width: 98%">
+                            <button type="button" class="btn btn-primary btn-sm mb-2" (click)="FilterDashboard()"
+                                style="float: left;width: 120px;">
+                                submit
+                            </button>
+                            <!-- <button type="button" class="btn btn-primary btn-sm mb-2" (click)="ClearFilter()"
+                                style="float: left;margin-left: 1%;width: 120px;">
+                                Clear
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-2 col-md-2 mb-4">
+            <div class="card border-left-assigned shadow h-100 py-2">
+                <div class="card-body" style="padding: 1rem !important;">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-assigned text-uppercase mb-1">Assigned
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboardService.totalAssigned}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-2 mb-4">
+            <div class="card border-left-pickedup shadow h-100 py-2">
+                <div class="card-body" style="padding: 1rem !important;">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-pickedup text-uppercase mb-1">Picked up
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboardService.totalPicked}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-2 mb-4">
+            <div class="card border-left-partially-delivered shadow h-100 py-2">
+                <div class="card-body" style="padding: 1rem !important;">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-partially-delivered text-uppercase mb-1">Partially
+                                Delivered
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{dashboardService.totalPartiallyDelivered}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-2 mb-4">
+            <div class="card border-left-delivered shadow h-100 py-2">
+                <div class="card-body" style="padding: 1rem !important;">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-delivered text-uppercase mb-1">Delivered
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboardService.totalDelivered}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="mbarChartLabels" [options]="barChartOptions"
+                    [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType"
+                    [options]="barChartOptions" (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

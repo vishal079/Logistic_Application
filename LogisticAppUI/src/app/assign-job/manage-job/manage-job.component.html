@@ -1,0 +1,300 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <!-- <div class="form-group mb-2 col-md-6">
+            <label for="">Job Title</label>
+            <input name="item_details" #item_details="ngModel" [(ngModel)]="jobMasterService.formEvent.job_title"
+                class="form-control-sm" placeholder="Enter Job Title" required maxlength="150" required
+                style="width: 98%">
+        </div> -->
+        <div class="form-group mb-2 col-md-12">
+            <div class="card" style="min-width: 99.5%;">
+                <div class="card-header">
+                    <div style="display: flex;">
+                        <label for="">Pickup Location</label>
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                            [(ngModel)]="_pickupLocationSelect" style="margin-left: 3%;">
+                            <label ngbButtonLabel class="btn-primary btn-sm">
+                                <input ngbButton type="radio" value="drpLocation"> Existing Locations
+                            </label>
+                            <label ngbButtonLabel class="btn-primary btn-sm">
+                                <input ngbButton type="radio" value="addLocation"> Add Location
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="form-group col-md-8" *ngIf="_pickupLocationSelect === 'drpLocation'">
+                            <label>Address</label>
+                            <select class="form-control-sm" id="pickup_location_id" name="pickup_location_id"
+                                #pickup_location_id="ngModel"
+                                [(ngModel)]="jobMasterService.formEvent.pickup_location_id" style="width: 98%"
+                                placeholder="Delivery Type">
+                                <option *ngFor="let item of jobMasterService.listPickupAddress" [ngValue]="item.id"
+                                    value="{{item.id}}">
+                                    {{item.address}}
+                                </option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group"> -->
+                        <div *ngIf="_pickupLocationSelect === 'addLocation'" class="form-group col-md-3"
+                            style="width: 23.5%;">
+                            <label for="">Block No/No</label>
+                            <input class="form-control-sm delivery-address-margin" #pickupLine1="ngModel" type="text"
+                                name="pickupLine1" [(ngModel)]="jobMasterService.formEvent.pick_up_location.line1"
+                                required autofocus size="20" placeholder="Block No/No" style="width: 100%;" />
+                        </div>
+                        <div *ngIf="_pickupLocationSelect === 'addLocation'" class="form-group col-md-2"
+                            style="width: 12%;">
+                            <label for="">Street/Road Name</label>
+                            <input class="form-control-sm delivery-address-margin" #pickupCity="ngModel" type="text"
+                                name="pickupCity" [(ngModel)]="jobMasterService.formEvent.pick_up_location.city"
+                                required autofocus size="20" placeholder="Street/Road Name" style="width:100%;">
+                        </div>
+                        <div *ngIf="_pickupLocationSelect === 'addLocation'" class="form-group col-md-2"
+                            style="width: 12%;">
+                            <label for="">Floor No/Unit No</label>
+                            <input class="form-control-sm delivery-address-margin" #pickupState="ngModel" type="text"
+                                name="pickupState" [(ngModel)]="jobMasterService.formEvent.pick_up_location.state"
+                                required autofocus size="20" placeholder="Floor No/Unit No" style="width:100%;">
+                        </div>
+                        <div *ngIf="_pickupLocationSelect === 'addLocation'" class="form-group col-md-2"
+                            style="width: 12%;">
+                            <label for="">Postal Code</label>
+                            <input class="form-control-sm delivery-address-margin" #pickupPostal_code="ngModel"
+                                type="text" name="pickupPostal_code"
+                                [(ngModel)]="jobMasterService.formEvent.pick_up_location.postal_code" required autofocus
+                                size="20" placeholder="### ###" style="width: 100%;" />
+                        </div>
+                        <!-- <div *ngIf="_pickupLocationSelect === 'addLocation'" class="form-group col-md-2"
+                            style="width: 12%;">
+                            <label for="">Country</label>
+                            <input class="form-control-sm delivery-address-margin" #pickupCountry="ngModel" type="text"
+                                name="pickupCountry" [(ngModel)]="jobMasterService.formEvent.pick_up_location.country"
+                                required autofocus size="20" placeholder="Country Name" style="width:100%;">
+                        </div> -->
+                        <div class="form-group col-md-3" style="width: 98%;">
+                            <label>Contact person</label>
+                            <select class="form-control-sm" id="contact_person_id" name="contact_person_id"
+                                #contact_person_id="ngModel" [(ngModel)]="jobMasterService.formEvent.contact_person"
+                                style="width: 98%" placeholder="Delivery Type">
+                                <option *ngFor="let item of jobMasterService.listContactPerson" [ngValue]="item.id"
+                                    value="{{item.id}}">
+                                    {{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-2 col-md-12">
+            <div class="card" style="min-width: 99.5%;">
+                <div class="card-header">
+                    <div style="display: flex;">
+                        <label for="">Job Details</label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="form-group mb-2 col-md-3">
+                            <label for="">Job Delivery Type</label><br />
+                            <div class="btn-group btn-group-toggle" ngbRadioGroup name="is_multi_location"
+                                #is_multi_location="ngModel" [(ngModel)]="jobMasterService.formEvent.is_multi_location"
+                                style="width: 100%;">
+                                <label ngbButtonLabel class="btn-primary btn-sm">
+                                    <input ngbButton type="radio" value="0"> Single Point
+                                </label>
+                                <label ngbButtonLabel class="btn-primary btn-sm">
+                                    <input ngbButton type="radio" value="1"> Multi point
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2 col-md-2">
+                            <label for="">Job Type</label>
+                            <select class="form-control-sm" id="job_type" name="job_type" #job_type="ngModel"
+                                [(ngModel)]="jobMasterService.formEvent.job_type" style="width: 98%"
+                                placeholder="Job Type">
+                                <option [ngValue]="0">None</option>
+                                <option [ngValue]="1" value="1">Envelope</option>
+                                <option [ngValue]="2" value="2">Box</option>
+                                <option [ngValue]="3" value="3">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2 col-md-2">
+                            <label for="">Vehicle Required</label>
+                            <select class="form-control-sm" id="vehicle_type" name="vehicle_type"
+                                #vehicle_type="ngModel" [(ngModel)]="jobMasterService.formEvent.vehicle_type"
+                                [value]='jobMasterService.formEvent.vehicle_type' style="width: 98%">
+                                <option value="">Choose Vehicle</option>
+                                <!-- [ngValue]="Vehicle.id" -->
+                                <option *ngFor="let Vehicle of jobMasterService.listVehicleType" value="{{Vehicle.id}}"
+                                    [selected]='Vehicle.id === jobMasterService.formEvent.vehicle_type'>
+                                    {{Vehicle.type}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2 col-md-2">
+                            <label for="">Delivery Type</label>
+                            <select class="form-control-sm" id="iddelivery_type" name="delivery_type"
+                                #delivery_type="ngModel" [(ngModel)]="jobMasterService.formEvent.delivery_type"
+                                (change)="changeType(jobMasterService.formEvent.delivery_type)" style="width: 98%"
+                                placeholder="Delivery Type">
+                                <option [ngValue]="0">None</option>
+                                <option [ngValue]="1" value="1">Same day</option>
+                                <option [ngValue]="2" value="2">Next day</option>
+                                <option [ngValue]="3" value="3">Urgent</option>
+                                <option [ngValue]="4" value="4">Scheduled</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2 col-md-2">
+                            <label for="">Date</label>
+                            <div class="input-group input-group-sm" style="width: 98%">
+                                <!-- *ngIf="jobMasterService.formEvent.delivery_type === 4" -->
+                                <input class="form-control-sm" placeholder="yyyy-mm-dd" name="EventDate"
+                                    #EventDate="ngModel" [(ngModel)]="jobMasterService._eventDateTime" ngbDatepicker
+                                    #d="ngbDatepicker" required style="width: 80%;
+                    border-top-right-radius: 0;border-bottom-right-radius: 0;"
+                                    [readonly]="jobMasterService.formEvent.delivery_type !== 4">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"
+                                        style="height: 28px;"
+                                        [disabled]="jobMasterService.formEvent.delivery_type !== 4">
+                                        <i class="fas fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2 col-md-12">
+            <div class="card" style="min-width: 99.5%;">
+                <div class="card-header">
+                    <div style="display: flex;">
+                        <label for="">Delivery Location</label>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addDeliveryLocation($event)"
+                            style="margin-left: 2%;padding: 0 .3rem;"
+                            *ngIf="jobMasterService.formEvent.is_multi_location === '1'">
+                            <i _ngcontent-cjx-c2="" class="fas fa-plus fa-wsh-plus"
+                                style="cursor: pointer;"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <ng-template ngFor let-delivery_location
+                            [ngForOf]="jobMasterService.formEvent.delivery_location" let-index="index"
+                            let-isLast="last">
+                            <div class="form-group col-md-2" style="width: 19%;">
+                                <label for="" *ngIf="index === 0">&nbsp;</label>
+                                <div class="btn-group btn-group-toggle" ngbRadioGroup
+                                    name="isExisting{{delivery_location.id}}" #isExisting1="ngModel"
+                                    [(ngModel)]="delivery_location.isExisting" style="width: 100%;margin: 1% 1% 0 0;">
+                                    <label ngbButtonLabel class="btn-primary btn-sm">
+                                        <input ngbButton type="radio" value="true"> Existing
+                                    </label>
+                                    <label ngbButtonLabel class="btn-primary btn-sm">
+                                        <input ngbButton type="radio" value="false"> Add New
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" *ngIf="delivery_location.isExisting == 'true'">
+                                <label>Delivery Address</label>
+                                <select class="form-control-sm" id="delivery_address"
+                                    name="delivery_address_{{delivery_location.id}}"
+                                    #delivery_address_{{delivery_location.id}}="ngModel"
+                                    [(ngModel)]="delivery_location.delivery_address_id" style="width: 98%"
+                                    placeholder="Delivery Type">
+                                    <option *ngFor="let item of jobMasterService.listDeliveryAddress"
+                                        [ngValue]="item.id">
+                                        {{item.address}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" style="width: 19%;"
+                                *ngIf="delivery_location.isExisting == 'false'">
+                                <label for="" *ngIf="index === 0">Block No/No {{delivery_location.isExisting}}</label>
+                                <input class="form-control-sm delivery-address-margin" #delAdd1="ngModel" type="text"
+                                    name="delAdd1_{{ delivery_location.id }}" [(ngModel)]="delivery_location.line1"
+                                    required autofocus size="20" placeholder="Block No/No" style="width: 100%;" />
+                            </div>
+                            <div class="form-group col-md-2" style="width: 12%;"
+                                *ngIf="delivery_location.isExisting == 'false'">
+                                <label for="" *ngIf="index === 0">Street/Road Name</label>
+                                <input class="form-control-sm delivery-address-margin" #delcity="ngModel" type="text"
+                                    name="delcity_{{ delivery_location.id }}" [(ngModel)]="delivery_location.city"
+                                    required autofocus size="20" placeholder="Street/Road Name" style="width:100%;">
+                            </div>
+                            <div class="form-group col-md-2" style="width: 12%;"
+                                *ngIf="delivery_location.isExisting == 'false'">
+                                <label for="" *ngIf="index === 0">Floor No/Unit No</label>
+                                <input class="form-control-sm delivery-address-margin" #delstate="ngModel" type="text"
+                                    name="state_{{ delivery_location.id }}" [(ngModel)]="delivery_location.state"
+                                    required autofocus size="20" placeholder="Floor No/Unit No" style="width:100%;">
+                            </div>
+                            <div class="form-group col-md-2" style="width: 12%;"
+                                *ngIf="delivery_location.isExisting == 'false'">
+                                <label for="" *ngIf="index === 0">Postal code</label>
+                                <input class="form-control-sm delivery-address-margin" #delpostal_code="ngModel"
+                                    type="text" name="delpostal_code_{{ delivery_location.id }}"
+                                    [(ngModel)]="delivery_location.postal_code" required autofocus size="20"
+                                    placeholder="### ###" style="width: 100%;" />
+                            </div>
+                            <!-- <div class="form-group col-md-2" style="width: 12%;">
+                                <label for="" *ngIf="index === 0">Country</label>
+                                <input class="form-control-sm delivery-address-margin" #delcountry="ngModel" type="text"
+                                    name="country_{{ delivery_location.id }}" [(ngModel)]="delivery_location.country"
+                                    required autofocus size="20" placeholder="Country Name" style="width:100%;">
+                            </div> -->
+                            <div class="form-group col-md-2" style="width: 12%;">
+                                <label for="" *ngIf="index === 0">Contact person</label>
+                                <input class="form-control-sm delivery-address-margin" #delname="ngModel" type="text"
+                                    name="country_{{ delivery_location.id }}" [(ngModel)]="delivery_location.name"
+                                    required autofocus size="20" placeholder="Contact name" style="width:100%;">
+                            </div>
+                            <div class="form-group col-md-2" style="width: 12%;">
+                                <label for="" *ngIf="index === 0">contact number</label>
+                                <input class="form-control-sm delivery-address-margin" #delname="ngModel" type="text"
+                                    name="country_{{ delivery_location.id }}" [(ngModel)]="delivery_location.phone"
+                                    required autofocus size="20" placeholder="contact no" style="width:100%;">
+                            </div>
+                            <div class="form-group col-md-1" style="width: 4%;" *ngIf="index !== 0">
+                                <i _ngcontent-cjx-c2="" class="fas fa-window-close" style="cursor: pointer;"
+                                    (click)="removeDeliveryLocation(index)"></i>
+                                <!-- <button *ngIf="index !== 0" class="btn btn-primary btn-sm delivery-address-margin"
+                                    (click)="removePet()">
+                                    <i _ngcontent-cjx-c2="" class="fas fa-window-close"
+                                        style="cursor: pointer;" (click)="removePet()"></i></button> -->
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group mb-2 col-md-12">
+            <label for="">Company</label>
+            <select class="form-control-sm" id="company_id" name="company_id" #company_id="ngModel"
+                [(ngModel)]="jobMasterService.formEvent.company_id" style="width: 99.5%">
+                <option value="">Choose Sub Company</option>
+                <option *ngFor="let item of jobMasterService.listSubCompany" [ngValue]="item.id" value="{{item.id}}">
+                    {{item.name}}
+                </option>
+            </select>
+        </div> -->
+        <div class="form-group mb-2 col-md-12">
+            <label for="">Other Details</label>
+            <textarea aria-multiline="true" name="other_details" #other_details="ngModel"
+                [(ngModel)]="jobMasterService.formEvent.other_details" class="form-control-sm"
+                placeholder="Other Details" required maxlength="1000" style="width: 99.5%; height: 80px;"></textarea>
+        </div>
+        <div class="form-group mb-2 col-md-5">&nbsp;</div>
+        <div class="form-group mb-2 col-md-3">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save</button>
+        </div>
+        <div class="form-group mb-2 col-md-4">&nbsp;</div>
+    </form>
+</div>

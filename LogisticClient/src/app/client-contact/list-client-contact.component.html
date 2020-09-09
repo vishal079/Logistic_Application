@@ -1,0 +1,69 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-3">
+        <span class="font-weight-bold text-primary">List of Contacts</span>
+        <button id="openModalButton" type="button" style="float: right;" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal">
+            Create Contact</button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Contact No</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contact of clientContactMasterService.listClientContacts 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>
+                            {{contact.name}}
+                        </td>
+                        <td>{{contact.designation}}</td>
+                        <td>
+                            {{contact.phone}}
+                        </td>
+                        <td>{{contact.email}}</td>
+                        <td>
+                            <button type="button" class="btn btn-wsh" data-toggle="modal" title="Edit"
+                                data-target="#exampleModal" (click)="bindContact($event, contact)"
+                                style="margin-left: 8px;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-edit fa-wsh-edit" style="cursor: pointer;"></i>
+                            </button>
+                            &nbsp;
+                            <button type="button" class="btn btn-wsh"
+                                (click)="inActiveContact($event, contact.client_id, contact.id, contact.name)" title="Delete"
+                                style="margin-left: 8px;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-trash fa-wsh-ban" style="cursor: pointer;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Job</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-client-contact></app-client-contact>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

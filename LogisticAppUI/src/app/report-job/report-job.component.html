@@ -1,0 +1,160 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">Job Report</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button (click)="ExportTOExcel()" class="btn btn-success btn-sm mb-2"
+                    style="float: right;margin-left: 1%;">ExportTOExcel</button>
+
+                <button printTitle="Job Report" class="btn btn-primary btn-sm" style="float: right;margin-left: 1%;"
+                    [useExistingCss]="true" printSectionId="Print_Job_Report" ngxPrint>
+                    <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="collapseBasic" style="margin-bottom: 1%;overflow: visible !important;">
+            <div class="well well-lg card card-block card-header flex-row" style="overflow: visible !important;">
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Client</label>
+                    <select class="form-control-sm" id="vehicle_type" name="filterClient" #filterClient="ngModel"
+                        [(ngModel)]="_filterClient" style="width: 98%">
+                        <option value="">Choose Client</option>
+                        <option *ngFor="let client of clientMasterService.listClient" value="{{client.id}}">
+                            {{client.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Delivery Type</label>
+                    <select class="form-control-sm" id="FilterStatus" name="FilterStatus" #FilterStatus="ngModel"
+                        [(ngModel)]="_FilterStatus" style="width: 98%">
+                        <option [ngValue]="0" value="0" selected>None</option>
+                        <option [ngValue]="1" value="1">Waiting to assign</option>
+                        <option [ngValue]="2" value="2">Assigned</option>
+                        <option [ngValue]="3" value="3">Picked up</option>
+                        <option [ngValue]="4" value="4">Partially Delivered</option>
+                        <option [ngValue]="5" value="5">Delivered</option>
+                        <option [ngValue]="6" value="6">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Delivery Date</label>
+                    <div class="input-group input-group-sm" style="width: 98%">
+                        <input class="form-control-sm" placeholder="yyyy-mm-dd" name="FilterDeliveryDate"
+                            #FilterDeliveryDate="ngModel" [(ngModel)]="_FilterDeliveryDate" ngbDatepicker
+                            #d="ngbDatepicker" required style="width: 80%;
+                            border-top-right-radius: 0;border-bottom-right-radius: 0;">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"
+                                style="height: 28px;">
+                                <i class="fas fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">&nbsp;</label>
+                    <div class="input-group input-group-sm" style="width: 98%">
+                        <button type="button" class="btn btn-primary btn-sm mb-2" (click)="FilterJobs()"
+                            style="float: left;width: 120px;">
+                            submit
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm mb-2" (click)="ClearFilter()"
+                            style="float: left;margin-left: 1%;width: 120px;">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" #TABLE #table id="Print_Job_Report">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">No</th>
+                        <th style="width: 8%;">Job Order No.</th>
+                        <th style="width: 11%;">Client</th>
+                        <th style="width: 11%;">Delivery Type</th>
+                        <th style="width: 11%;">Delivery Date</th>
+                        <th style="width: 12%;">Delivery Status</th>
+                        <th style="width: 13%;">Assigned To</th>
+                        <th style="width: 6%;">Multipoint</th>
+                        <th style="width: 10%;">Created Date</th>
+                        <th style="width: 10%;">Updated Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let job of assignJob.listPendingJob 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>
+                            {{job.item_id}}
+                        </td>
+                        <td>
+                            {{job.name}}
+                        </td>
+                        <td>
+                            <span *ngIf="job.delivery_type == 1;">
+                                Same Day
+                            </span>
+                            <span *ngIf="job.delivery_type == 2;">
+                                Next Day
+                            </span>
+                            <span *ngIf="job.delivery_type == 3;">
+                                Urgent
+                            </span>
+                            <span *ngIf="job.delivery_type == 4;">
+                                Scheduled
+                            </span>
+                        </td>
+                        <td>
+                            <span>{{job.delivery_date}}</span>
+                        </td>
+                        <td>
+                            <span *ngIf="job.job_status == 0;">
+                                Waiting to assign
+                            </span>
+                            <span *ngIf="job.job_status == 1;">
+                                Assigned
+                            </span>
+                            <span *ngIf="job.job_status == 2;">
+                                Picked up
+                            </span>
+                            <span *ngIf="job.job_status == 3;">
+                                Partially delivered
+                            </span>
+                            <span *ngIf="job.job_status == 4">
+                                Delivered
+                            </span>
+                            <span *ngIf="job.job_status == 5">
+                                Cancelled
+                            </span>
+                        <td>
+                            <div *ngIf="job.job_status != 0">
+                                <span *ngFor="let staff of staffService.listStaff">
+                                    <span *ngIf="staff.id == job.staff_id">
+                                        {{staff.name}}
+                                    </span>
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <span *ngIf="job.is_multi_location_delivery === '0'">No</span>
+                            <span *ngIf="job.is_multi_location_delivery === '1'">Yes</span>
+                        </td>
+                        <td>
+                            {{job.created_at}}
+                        </td>
+                        <td>{{job.updated_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

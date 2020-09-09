@@ -1,0 +1,49 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">Staff Report</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button (click)="ExportTOExcel()" class="btn btn-success btn-sm mb-2"
+                    style="float: right;margin-left: 1%;">ExportTOExcel</button>
+
+                <button printTitle="Job Report" class="btn btn-primary btn-sm" style="float: right;margin-left: 1%;"
+                    [useExistingCss]="true" printSectionId="Print_Staff_Report" ngxPrint>
+                    <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" #TABLE #table id="Print_Staff_Report">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>vehicle assigned</th>
+                        <th>Crated Date</th>
+                        <th>Updated Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let staff of staffService.listStaff 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>{{staff.name}}</td>
+                        <td>{{staff.email}}</td>
+                        <td>{{staff.phone}}</td>
+                        <td>{{staff.number}}</td>
+                        <td>{{staff.created_at}}</td>
+                        <td>{{staff.updated_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

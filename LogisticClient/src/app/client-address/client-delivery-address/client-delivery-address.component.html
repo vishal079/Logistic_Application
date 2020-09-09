@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Block No/No</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="line1" #line1="ngModel" [(ngModel)]="clientAddressMasterService.formEventDeliveryAddress.line1"
+                class="form-control" placeholder="Block No/No" required maxlength="150" required style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Street/Road Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="city" #city="ngModel" [(ngModel)]="clientAddressMasterService.formEventDeliveryAddress.city"
+                class="form-control" placeholder="Street/Road Name" required maxlength="150" required
+                style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Floor No/Unit No</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="state" #state="ngModel" [(ngModel)]="clientAddressMasterService.formEventDeliveryAddress.state"
+                class="form-control" placeholder="Floor No/Unit No" required maxlength="150" required
+                style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Postal Code</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="phone" #phone="ngModel" [(ngModel)]="clientAddressMasterService.formEventDeliveryAddress.postal_code"
+                class="form-control" placeholder="### ###" required maxlength="150" required style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save</button>
+        </div>
+    </form>
+</div>

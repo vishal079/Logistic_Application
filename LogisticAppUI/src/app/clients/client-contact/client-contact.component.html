@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="name" #name="ngModel" [(ngModel)]="clientContactMasterService.formEvent.name"
+                class="form-control" placeholder="Contact Name" required maxlength="150" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Designation</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="designation" #designation="ngModel"
+                [(ngModel)]="clientContactMasterService.formEvent.designation" class="form-control"
+                placeholder="Designation" required maxlength="150" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Contact No.</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="phone" #phone="ngModel" [(ngModel)]="clientContactMasterService.formEvent.phone"
+                class="form-control" placeholder="Contact Number" required maxlength="150" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Email</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="email" #email="ngModel" [(ngModel)]="clientContactMasterService.formEvent.email"
+                class="form-control" placeholder="person@company.com" required maxlength="150" required
+                style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save</button>
+        </div>
+    </form>
+</div>

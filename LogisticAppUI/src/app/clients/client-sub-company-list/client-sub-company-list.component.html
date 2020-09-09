@@ -1,0 +1,88 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">List of Sub Company</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button type="button" style="float: right;" class="btn btn-primary btn-sm" data-toggle="modal"
+                    data-target="#exampleModal">
+                    Add Sub Company</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-header py-3">
+        <div class="col-md-3">
+            <label for="">Select Client</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <select class="form-control" id=parentCompany_id name="parentCompany_id" style="width: 80%"
+                (change)="onParentCompanyChange($event.target.value)"
+                [value]='clientSubCompanyService.selectedParentCompany'>
+                <option value="">Choose Company</option>
+                <option *ngFor="let parentCompany of clientSubCompanyService.listParentCompany"
+                    [ngValue]="parentCompany.id" value="{{parentCompany.id}}">
+                    {{parentCompany.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subCompany of clientSubCompanyService.listSubCompany 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>{{subCompany.name}}</td>
+                        <td>{{subCompany.phone}}</td>
+                        <td>{{subCompany.address}}</td>
+                        <td>
+                            <!-- <button type="button" class="btn" (click)="bindClient($event, subCompany.id)">
+                                <i _ngcontent-cjx-c2="" class="fas fa-edit fa-sm text-black-50"
+                                    style="cursor: pointer;"></i>
+                            </button>
+                            &nbsp; -->
+                            <button type="button" class="btn" (click)="inActiveClient($event, subCompany.id)">
+                                <i _ngcontent-cjx-c2="" class="fas fa-trash fa-sm text-black-50"
+                                    style="cursor: pointer;"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Sub Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-client-sub-company></app-client-sub-company>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

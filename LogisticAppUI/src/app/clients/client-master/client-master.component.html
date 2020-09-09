@@ -1,0 +1,122 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <!-- <div class="form-group mb-2  col-md-2">
+            <label for="">Assembly</label>
+        </div>
+        <div class="form-group mb-2 col-md-10">
+            <select class="form-control" id=AssemblyId name="AssemblyId" #AssemblyId="ngModel"
+                [(ngModel)]="clientService.formEvent.AssemblyId" style="width: 50%">
+                <option value="">Choose your Assembly</option>
+                <option *ngFor="let assembly of clientService.listAssembly" [ngValue]="assembly.Id"
+                    value="{{assembly.Id}}">
+                    {{assembly.Name}}
+                </option>
+            </select>
+        </div> -->
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Client Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="ClientName" #ClientName="ngModel" [(ngModel)]="clientService.formEvent.name"
+                class="form-control" placeholder="Client Name" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Email Address {{is_edit}}</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Email" #Email="ngModel" [(ngModel)]="clientService.formEvent.email" class="form-control"
+                placeholder="client@gmail.com" required maxlength="100" required style="width: 80%"
+                [readonly]="is_edit">
+        </div>
+
+        <div class="form-group mb-2 col-md-3" *ngIf="!is_edit">
+            <label for="">Password</label>
+        </div>
+        <div class="form-group mb-2 col-md-9" *ngIf="!is_edit">
+            <show-hide-password btnStyle="primary" [btnOutline]="false" style="width: 80%">
+                <input type="password" name="password" #Password="ngModel"
+                    [(ngModel)]="clientService.formEvent.password" class="form-control" placeholder="password" required
+                    maxlength="100" required style="width: 80%">
+            </show-hide-password>
+        </div>
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Phone Number</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="clientService.formEvent.phone" class="form-control"
+                placeholder="XXXXXXXX" required maxlength="100" required style="width: 80%">
+        </div>
+        <!-- <div class="form-group mb-2 col-md-2">
+            <label for="">Date</label>
+        </div>
+        <div class="form-group mb-2 col-md-10">
+            <div class="input-group" style="width: 50%">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="EventDate" #EventDate="ngModel"
+                    [(ngModel)]="_eventDateTime" ngbDatepicker #d="ngbDatepicker" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Block No/No</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <textarea aria-multiline="true" name="line1" #line1="ngModel" [(ngModel)]="clientService.formEvent.line1"
+                class="form-control" placeholder="Block No/No" required maxlength="1000" style="width: 80%"></textarea>
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Street/Road Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <textarea aria-multiline="true" name="city" #city="ngModel" [(ngModel)]="clientService.formEvent.city"
+                class="form-control" placeholder="Street/Road Name" required maxlength="1000"
+                style="width: 80%"></textarea>
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Floor No/Unit No</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <textarea aria-multiline="true" name="state" #state="ngModel" [(ngModel)]="clientService.formEvent.state"
+                class="form-control" placeholder="Floor No/Unit No" required maxlength="1000"
+                style="width: 80%"></textarea>
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Postal Code</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="postal_code" #postal_code="ngModel" [(ngModel)]="clientService.formEvent.postal_code"
+                class="form-control" placeholder="Postal Code" required maxlength="100" required style="width: 80%">
+        </div>
+        <!-- <div class="form-group mb-2 col-md-3">
+            <label for="">Descriptions</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <textarea aria-multiline="true" name="EventDesc" #EventDesc="ngModel"
+                [(ngModel)]="clientService.formEvent.Description" class="form-control" placeholder="Description"
+                required maxlength="1000" style="width: 80%"></textarea>
+        </div> -->
+        <!-- <div class="form-group mb-2  col-md-3">
+            <label for="">Client Type</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <select class="form-control" id="ClientTypeId" name="ClientTypeId" #ClientTypeId="ngModel"
+                [(ngModel)]="clientService.formEvent.ClientType" style="width: 80%" placeholder="Client Type">
+                <option [ngValue]="0">None</option>
+                <option [ngValue]="1" value="Fixed">Fixed</option>
+                <option [ngValue]="2" value="Adhoc">Adhoc</option>
+            </select>
+        </div> -->
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save changes</button>
+            <!-- <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-warning" style="margin-left: 1%;">Clear</button> -->
+        </div>
+    </form>
+</div>

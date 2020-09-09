@@ -1,0 +1,253 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 13px !important;
+}
+
+button.calendar, button.calendar:active {
+    width: 2.75rem;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: center;
+}
+
+/* Sortable table demo */
+
+th[sortable] {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+th[sortable].desc:before, th[sortable].asc:before {
+    content: '';
+    display: block;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAmxJREFUeAHtmksrRVEUx72fH8CIGQNJkpGUUmakDEiZSJRIZsRQmCkTJRmZmJgQE0kpX0D5DJKJgff7v+ru2u3O3vvc67TOvsdatdrnnP1Y///v7HvvubdbUiIhBISAEBACQkAICAEhIAQ4CXSh2DnyDfmCPEG2Iv9F9MPlM/LHyAecdyMzHYNwR3fdNK/OH9HXl1UCozD24TCvILxizEDWIEzA0FcM8woCgRrJCoS5PIwrANQSMAJX1LEI9bqpQo4JYNFFKRSvIgsxHDVnqZgIkPnNBM0rIGtYk9YOOsqgbgepRCfdbmFtqhFkVEDVPjJp0+Z6e6hRHhqBKgg6ZDCvYBygVmUoEGoh5JTRvIJwhJo1aUOoh4CLPMyvxxi7EWOMgnCGsXXI1GIXlZUYX7ucU+kbR8NW8lh3O7cue0Pk32MKndfUxQFAwxdirk3fHappAnc0oqDPzDfGTBrCfHP04dM4oTV8cxr0SVzH9FF07xD3ib6xCDE+M+aUcVygtWzzbtGX2rPBrEUYfecfQkaFzYi6HjVnGBdtL7epqAlc1+jRdAap74RrnPc4BCijttY2tRcdN0g17w7HqZrXhdJTYAuS3hd8z+vKgK3V1zWPae0mZDMykadBn1hTQBLnZNwVrJpSe/NwEeDsEwCctEOsJTsgxLvCqUl2ACftEGvJDgjxrnBqkh3ASTvEWrIDQrwrnJpkB3DSDrGW7IAQ7wqnJtkBnLRztejXXVu4+mxz/nQ9jR1w5VB86ejLTFcnnDwhzV+F6T+CHZlx6THSjn76eyyBIOPHyDakhBAQAkJACAgBISAEhIAQYCLwC8JxpAmsEGt6AAAAAElFTkSuQmCC') no-repeat;
+    background-size: 22px;
+    width: 22px;
+    height: 22px;
+    float: left;
+    margin-left: -22px;
+}
+
+th[sortable].desc:before {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+
+/* Filtering table demo */
+
+ngbd-table-filtering span.ngb-highlight {
+    background-color: yellow;
+}
+
+/* Complete table demo */
+
+ngbd-table-complete span.ngb-highlight {
+    background-color: yellow;
+}
+
+ngb-carousel .picsum-img-wrapper {
+    position: relative;
+    height: 0;
+    padding-top: 55%;
+    /* Keep ratio for 900x500 images */
+}
+
+ngb-carousel .picsum-img-wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.fa-wsh-edit, .fa-wsh-trash, .fa-wsh-print, .fa-wsh-ban {
+    font-size: 1em;
+}
+
+.fa-wsh-edit {
+    color: orange;
+}
+
+.fa-wsh-print {
+    color: #4e73df;
+}
+
+.fa-wsh-copy {
+    color: slateblue;
+}
+
+.fa-wsh-trash, .fa-wsh-ban {
+    color: orangered;
+}
+
+.btn-wsh {
+    float: left;
+    padding: 0px;
+}
+
+.ngb-tp-input {
+    width: 100% !important;
+}
+
+.modal-lg, .modal-xl {
+    max-width: 98% !important;
+}
+
+@media (min-width: 992px) {
+    .modal-lg, .modal-xl {
+        max-width: 98% !important;
+    }
+}
+
+.form-control-sm:focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #bac8f3;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(78, 115, 223, .25);
+}
+
+.form-control-sm {
+    border: 1px solid #d1d3e2;
+    border-top-color: rgb(209, 211, 226);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(209, 211, 226);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(209, 211, 226);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(209, 211, 226);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: .35rem;
+    border-top-left-radius: 0.35rem;
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition-property: border-color, box-shadow;
+    transition-duration: 0.15s, 0.15s;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0s, 0s;
+    font-size: 12px !important;
+}
+
+.card-header {
+    padding: .3rem 1.0rem;
+}
+
+.delivery-address-margin {
+    margin: 1% 1% 0 0;
+}
+
+.btn-primary {
+    background-color: #527dfe;
+}
+
+/* Progress bar */
+
+.date {
+    font-size: 11px
+}
+
+.divider {
+    height: 0px !important;
+    background-color: blue
+}
+
+.track-line {
+    height: 2px !important;
+    background-color: green
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 0px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.big-dot {
+    height: 25px;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block
+}
+
+/* Progress bar over */
+
+/* Dashboard */
+
+.border-left-waiting {
+    border-left: .25rem solid #f6c23e!important;
+}
+
+.text-waiting {
+    color: #f6c23e!important;
+}
+
+.border-left-assigned {
+    border-left: .25rem solid #7f9cf1 !important;
+}
+
+.text-assigned {
+    color: #7f9cf1!important;
+}
+
+.border-left-pickedup {
+    border-left: .25rem solid #3765ee !important;
+}
+
+.text-pickedup {
+    color: #3765ee !important;
+}
+
+.border-left-partially-delivered {
+    border-left: .25rem solid #51d1a3 !important;
+}
+
+.text-partially-delivered {
+    color: #51d1a3 !important;
+}
+
+.border-left-delivered {
+    border-left: .25rem solid #318d6b !important;
+}
+
+.text-delivered {
+    color: #318d6b !important;
+}
+
+.border-left-cancelled {
+    border-left: .25rem solid #e74a3b !important;
+}
+
+.text-cancelled {
+    color: #e74a3b !important;
+}
+
+/*Dashboard over*/

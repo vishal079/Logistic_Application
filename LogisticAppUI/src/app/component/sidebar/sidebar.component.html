@@ -1,0 +1,165 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="status ? 'toggled' : ''" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html"
+    style="background-color: white;height: 70px;">
+    <!-- <div class="sidebar-brand-icon rotate-n-15">
+       <i class="fas fa-laugh-wink"></i>
+     </div> -->
+    <!-- <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>-->
+    <div class="sidebar-brand-text mx-3">
+      <!-- Logistic App -->
+      <img src="assets/images/Logo_WSH_Experts_Pte_Ltd.png" style="width: 100px;height: 60px;">
+    </div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" routerLinkActive="active" routerLink="Dashboard">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>Dashboard</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    <!-- FollowUp -->
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJob" aria-expanded="true"
+      aria-controls="collapseTwo">
+      <i class="fas fa-briefcase"></i>
+      <span>Assign Jobs</span>
+    </a>
+    <div id="collapseJob" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" routerLinkActive="active" routerLink="AssignJobs">Assign Jobs</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+      aria-controls="collapseTwo">
+      <i class="far fa-address-book"></i>
+      <span>Clients</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <!-- <h6 class="collapse-header">Add Attendance</h6> -->
+        <!-- <a class="collapse-item" routerLinkActive="active" routerLink="ManageClient">Manage Client</a> -->
+        <a class="collapse-item" routerLinkActive="active" routerLink="ViewClient">Manage Client</a>
+        <a class="collapse-item" routerLinkActive="active" routerLink="ManageContact">Manage Contact</a>
+        <a class="collapse-item" routerLinkActive="active" routerLink="ManageSubCompany">Manage Sub Company</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Events Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Staff Manager</span>
+    </a>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" routerLinkActive="active" routerLink="ManageStaff">Manage Staff</a>
+        <!-- <a class="collapse-item" routerLinkActive="active" routerLink="ViewClient">View Report</a> -->
+      </div>
+    </div>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAssembly" aria-expanded="true"
+      aria-controls="collapseAssembly">
+      <i class="fas fa-fw fa-truck"></i>
+      <span>Vehicle Manager</span>
+    </a>
+    <div id="collapseAssembly" class="collapse" aria-labelledby="headingAssembly" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+        <a class="collapse-item" routerLinkActive="active" routerLink="ManageVehicle">Manage Vehicle</a>
+      </div>
+    </div>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWSHReports" aria-expanded="true"
+      aria-controls="collapseAssembly">
+      <i class="fas fa-fw fa-file"></i>
+      <span>Reports</span>
+    </a>
+    <div id="collapseWSHReports" class="collapse" aria-labelledby="headingAssembly" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+        <a class="collapse-item" routerLinkActive="active" routerLink="ReportJob">Job Reports</a>
+        <a class="collapse-item" routerLinkActive="active" routerLink="ReportClient">Client Reports</a>
+        <a class="collapse-item" routerLinkActive="active" routerLink="ReportStaff">Staff Reports</a>
+        <a class="collapse-item" routerLinkActive="active" routerLink="ReportVehicle">Vehicle Reports</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Divider -->
+  <!-- <hr class="sidebar-divider"> -->
+
+  <!-- Heading -->
+  <!-- <div class="sidebar-heading">
+      Addons
+    </div> -->
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <!-- <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+        aria-controls="collapsePages">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Pages</span>
+      </a>
+      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Login Screens:</h6>
+          <a class="collapse-item" href="login.html">Login</a>
+          <a class="collapse-item" href="register.html">Register</a>
+          <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+          <div class="collapse-divider"></div>
+          <h6 class="collapse-header">Other Pages:</h6>
+          <a class="collapse-item" href="404.html">404 Page</a>
+          <a class="collapse-item" href="blank.html">Blank Page</a>
+        </div>
+      </div>
+    </li> -->
+
+  <!-- Nav Item - Charts -->
+  <!-- <li class="nav-item">
+      <a class="nav-link" href="charts.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Charts</span></a>
+    </li> -->
+
+  <!-- Nav Item - Tables -->
+  <!-- <li class="nav-item">
+      <a class="nav-link" href="tables.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Tables</span></a>
+    </li> -->
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle" (click)='clickToggleSidebar()'></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->

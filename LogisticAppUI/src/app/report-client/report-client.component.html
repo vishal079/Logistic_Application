@@ -1,0 +1,55 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">Client Report</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button (click)="ExportTOExcel()" class="btn btn-success btn-sm mb-2"
+                    style="float: right;margin-left: 1%;">ExportTOExcel</button>
+
+                <button printTitle="Client Report" class="btn btn-primary btn-sm" style="float: right;margin-left: 1%;"
+                    [useExistingCss]="true" printSectionId="Print_client_Report" ngxPrint>
+                    <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" #TABLE #table id="Print_client_Report">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">No</th>
+                        <th style="width: 14%;">Name</th>
+                        <th style="width: 14%;">Email</th>
+                        <th style="width: 10%;">Contact No.</th>
+                        <th style="width: 10%;">Block No/No</th>
+                        <th style="width: 10%;">Street/Road Name</th>
+                        <th style="width: 10%;">Floor No/Unit No</th>
+                        <th style="width: 10%;">Postal Code</th>
+                        <th style="width: 10%;">Created Date</th>
+                        <th style="width: 9%;">Updated Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clientService.listClient 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>{{client.name}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.line1}}</td>
+                        <td>{{client.city}}</td>
+                        <td>{{client.state}}</td>
+                        <td>{{client.postal_code}}</td>
+                        <td>{{client.created_at}}</td>
+                        <td>{{client.updated_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

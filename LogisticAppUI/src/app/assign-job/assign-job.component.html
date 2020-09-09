@@ -1,0 +1,414 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">List of Jobs</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button type="button" class="btn btn-primary btn-sm mb-2" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"
+                    style="float: right;margin-left: 1%;overflow: visible !important;">
+                    <i class="fas fa-filter"></i>
+                    Filter
+                </button>
+                <button (click)="ExportTOExcel()" class="btn btn-success btn-sm mb-2"
+                    style="float: right;margin-left: 1%;">ExportTOExcel</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card-header py-3">
+        <div class="form-group mb-2  col-md-3">
+            <label for="">Parent Company</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <select class="form-control" id=parentCompany_id name="parentCompany_id" style="width: 80%"
+                (change)="onParentCompanyChange($event.target.value)"
+                [value]='clientSubCompanyService.selectedParentCompany'>
+                <option value="">Choose Company</option>
+                <option *ngFor="let parentCompany of clientSubCompanyService.listParentCompany"
+                    [ngValue]="parentCompany.id" value="{{parentCompany.id}}">
+                    {{parentCompany.name}}
+                </option>
+            </select>
+        </div>
+    </div> -->
+    <div class="card-body">
+        <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true"
+            style="margin-bottom: 1%;overflow: visible !important;">
+            <div class="well well-lg card card-block card-header flex-row" style="overflow: visible !important;">
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Client</label>
+                    <select class="form-control-sm" id="vehicle_type" name="filterClient" #filterClient="ngModel"
+                        [(ngModel)]="_filterClient" style="width: 98%">
+                        <option value="">Choose Client</option>
+                        <option *ngFor="let client of clientMasterService.listClient" value="{{client.id}}">
+                            {{client.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Delivery Type</label>
+                    <select class="form-control-sm" id="FilterStatus" name="FilterStatus" #FilterStatus="ngModel"
+                        [(ngModel)]="_FilterStatus" style="width: 98%">
+                        <option [ngValue]="0" value="0" selected>None</option>
+                        <option [ngValue]="1" value="1">Waiting to assign</option>
+                        <option [ngValue]="2" value="2">Assigned</option>
+                        <option [ngValue]="3" value="3">Picked up</option>
+                        <option [ngValue]="4" value="4">Partially Delivered</option>
+                        <option [ngValue]="5" value="5">Delivered</option>
+                        <option [ngValue]="6" value="6">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">Delivery Date</label>
+                    <div class="input-group input-group-sm" style="width: 98%">
+                        <input class="form-control-sm" placeholder="yyyy-mm-dd" name="FilterDeliveryDate"
+                            #FilterDeliveryDate="ngModel" [(ngModel)]="_FilterDeliveryDate" ngbDatepicker
+                            #d="ngbDatepicker" required style="width: 80%;
+                            border-top-right-radius: 0;border-bottom-right-radius: 0;">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"
+                                style="height: 28px;">
+                                <i class="fas fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-2 col-md-3">
+                    <label for="">&nbsp;</label>
+                    <div class="input-group input-group-sm" style="width: 98%">
+                        <button type="button" class="btn btn-primary btn-sm mb-2" (click)="FilterJobs()"
+                            style="float: left;width: 120px;">
+                            submit
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm mb-2" (click)="ClearFilter()"
+                            style="float: left;margin-left: 1%;width: 120px;">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" #TABLE #table>
+            <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">No</th>
+                        <th style="width: 8%;">Job Order No.</th>
+                        <th style="width: 11%;">Client</th>
+                        <th style="width: 11%;">Delivery Type</th>
+                        <th style="width: 11%;">Delivery Date</th>
+                        <th style="width: 12%;">Delivery Status</th>
+                        <th style="width: 13%;">Assigned To</th>
+                        <th style="width: 6%;">Multipoint</th>
+                        <th style="width: 10%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let job of assignJob.listPendingJob 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>
+                            <button type="button" class="btn btn-wsh btn-link" data-toggle="modal" title="Item Details"
+                                data-target="#jobDetailModal" (click)="showJobDetails($event, job)"
+                                style="font-size: 13px">
+                                <u>{{job.item_id}}</u>
+                            </button>
+                        </td>
+                        <td>
+                            {{job.name}}
+                            <!-- <button type="button" class="btn btn-wsh btn-link" data-toggle="modal"
+                                title="Company Details" data-target="#exampleModal">
+                                <u>{{job.name}}</u>
+                            </button> -->
+                        </td>
+                        <td>
+                            <span *ngIf="job.delivery_type == 1;">
+                                Same Day
+                            </span>
+                            <span *ngIf="job.delivery_type == 2;">
+                                Next Day
+                            </span>
+                            <span *ngIf="job.delivery_type == 3;">
+                                Urgent
+                            </span>
+                            <span *ngIf="job.delivery_type == 4;">
+                                Scheduled
+                            </span>
+                        </td>
+                        <td>
+                            <span>{{job.delivery_date}}</span>
+                        </td>
+                        <td>
+                            <span *ngIf="job.job_status == 0;">
+                                Waiting to assign
+                            </span>
+                            <span *ngIf="job.job_status == 1;">
+                                Assigned
+                            </span>
+                            <span *ngIf="job.job_status == 2;">
+                                Picked up
+                            </span>
+                            <span *ngIf="job.job_status == 3;">
+                                Partially delivered
+                            </span>
+                            <span *ngIf="job.job_status == 4">
+                                Delivered
+                            </span>
+                            <span *ngIf="job.job_status == 5">
+                                Cancelled
+                            </span>
+                        <td>
+                            <div *ngIf="job.job_status == '0'">
+                                <select class="form-control-sm" id=parentCompany_id name="Company_id"
+                                    #Company_id="ngModel" [(ngModel)]='job.staff_id'
+                                    style="display: inline-flex; width: 60%;" [value]='job.staff_id'>
+                                    <option value="">Choose Employee</option>
+                                    <option *ngFor="let staff of staffService.listStaff" [ngValue]="staff.id"
+                                        value="{{staff.id}}">
+                                        {{staff.name}}
+                                    </option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary"
+                                    style="margin-left: 2%;padding: 1px 6px;cursor: pointer;"
+                                    (click)="assignJobtoStaff($event, job.id,job.staff_id)">
+                                    <i class="far fa-check-circle"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="job.job_status != 0">
+                                <span *ngFor="let staff of staffService.listStaff">
+                                    <span *ngIf="staff.id == job.staff_id">
+                                        {{staff.name}}
+                                        <!-- <i class="fas fa-map-marker" aria-hidden="true"></i> -->
+                                    </span>
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <span *ngIf="job.is_multi_location_delivery === '0'">No</span>
+                            <span *ngIf="job.is_multi_location_delivery === '1'">Yes</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-wsh" data-toggle="modal" title="Print"
+                                data-target="#jobDetailModal" (click)="showJobDetails($event, job)"
+                                style="margin-left: 8px;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-print fa-wsh-print" style="cursor: pointer;"></i>
+                            </button>
+                            &nbsp;
+                            <button type="button" class="btn btn-wsh" data-toggle="modal" title="Edit"
+                                *ngIf="job.job_status != 5" data-target="#exampleModal" (click)="bindJobDetails(job)"
+                                style="margin-left: 8px;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-edit fa-wsh-edit" style="cursor: pointer;"></i>
+                            </button>
+                            &nbsp;
+                            <button type="button" class="btn btn-wsh" (click)="cancelJob($event, job.id)" title="Cancel"
+                                style="margin-left: 8px;" *ngIf="job.job_status != 5">
+                                <i _ngcontent-cjx-c2="" class="fas fa-ban fa-wsh-ban" style="cursor: pointer;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background-color: #f8f9fc;">
+                <h5 class="modal-title" id="exampleModalLabel">Manage Job</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-manage-job [result]='client_id'></app-manage-job>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="jobDetailModal" tabindex="-1" role="dialog"
+    aria-labelledby="jobDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background-color: #f8f9fc;">
+                <h5 class="modal-title" id="exampleModalLabel">Job Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Print_Job_Details">
+                <div class="row" *ngIf="_objclientJobMaster != null">
+                    <div class="col-md-12 mb-2">
+                        <table class="table table-sm" width="100%" cellspacing="0">
+                            <tr>
+                                <td style="width: 30%;text-align: left;border: 0px;">
+                                    <img src="assets/images/Logo_WSH_Experts_Pte_Ltd.png"
+                                        style="width: 100px;height: 60px;">
+                                </td>
+                                <td style="width: 40%;text-align: center;border: 0px;">
+                                    <h5>Job Status Report</h5>
+                                </td>
+                                <td style="width: 30%;text-align: right;border: 0px;">
+                                    <span>Report Created Date:
+                                        {{report_currentDateTime | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12"><b><u>Job Details</u></b></div>
+                    <div class="col-md-12 mb-2" style="float: right;">
+                        <table class="table table-bordered table-sm" border="1" width="100%" cellspacing="0"
+                            style="border: 1px solid lightgray;">
+                            <tr>
+                                <td style="width: 15%;"><b>Job Order No.</b></td>
+                                <td style="width: 35%;">{{_objclientJobMaster.Job_Id}}</td>
+                                <td style="width: 15%;"><b>Job Status</b></td>
+                                <td style="width: 35%;">{{_objclientJobMaster.jobStatusLabe}}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 15%;"><b>Vehicle</b></td>
+                                <td style="width: 35%;">
+                                    <span *ngIf="_objclientJobMaster.vehicalName != '';else other_content">
+                                        {{_objclientJobMaster.vehicalName}} ({{_objclientJobMaster.vehicalType}})
+                                    </span>
+                                    <ng-template #other_content>other content here...</ng-template>
+                                </td>
+                                <td style="width: 15%;"><b>Is Multiple Location</b></td>
+                                <td style="width: 35%;">{{_objclientJobMaster.is_multi_location}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Job Type</b></td>
+                                <td>{{_objclientJobMaster.job_type}}</td>
+                                <td><b>Delivery Date</b></td>
+                                <td>{{_objclientJobMaster.delivery_date}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12 mb-2" style="float: right;">
+                        <div class="bg-white p-2 border rounded px-3">
+                            <div class="d-flex flex-row justify-content-between align-items-center order">
+                                <div class="d-flex flex-column order-details"><span>Your order has been
+                                        {{_objclientJobMaster.jobStatusLabe}}</span></div>
+                                <!-- <div class="tracking-details"><button class="btn btn-outline-primary btn-sm"
+                                        type="button">Track order details</button></div> -->
+                            </div>
+                            <!-- <hr class="divider mb-4"> -->
+                            <div
+                                class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                                <span class="dot"></span>
+                                <hr class="flex-fill track-line"><span class="dot"></span>
+                                <hr class="flex-fill track-line"><span class="dot"></span>
+                                <!-- <hr class="flex-fill track-line"><span class="dot"></span> -->
+                                <hr class="flex-fill track-line"><span
+                                    class="d-flex justify-content-center align-items-center big-dot dot"><i
+                                        class="fa fa-check text-white"></i></span></div>
+                            <div class="d-flex flex-row justify-content-between align-items-center">
+                                <div class="d-flex flex-column align-items-start">
+                                    <span>{{_objclientJobMaster.created_at}}</span><span>Order
+                                        placed</span></div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <span>{{_objclientJobMaster._assign_date}}</span><span>Order
+                                        Assigned</span></div>
+                                <div class="d-flex flex-column justify-content-center align-items-center"><span>
+                                        {{_objclientJobMaster.staff_pick_up_date}}</span><span>Order Picked up</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-end">
+                                    <span>{{_objclientJobMaster.staff_delivery_date}}
+                                    </span><span>Order Delivered</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12">
+                        <table class="table table-sm" width="100%" cellspacing="0">
+                            <thead>
+                                <th style="border: 0px;width: 30%;text-align: left;">Pickup Details</th>
+                                <th style="border: 0px;width: 40%;text-align: left;">Pickup Images</th>
+                                <th style="border: 0px;width: 30%;text-align: left;">Pickup Signature</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let pickupLoc of _objclientJobMaster.pick_up_location">
+                                    <td style="width: 30%;text-align: left;">
+                                        <span><u><b>Pickup location:</b></u></span><br />
+                                        <span>
+                                            {{pickupLoc.line1}}, {{pickupLoc.city}} ,<br />
+                                            {{pickupLoc.state}}, {{pickupLoc.postal_code}}</span><br />
+                                        <span><u><b>Pickup Contact:</b></u></span><br />
+                                        <span>Delivery Contact Person : {{_objclientJobMaster.contactPersonName}}
+                                        </span>
+                                    </td>
+                                    <td style="width: 40%;text-align: left;">
+                                        <div *ngFor="let pickupImgPath of pickupLoc.pickup_Images">
+                                            <img src="{{pickupImgPath.image_name}}" height="20%" width="25%">
+                                        </div>
+                                    </td>
+                                    <td style="width: 30%;text-align: left;" *ngIf="pickupLoc.pickup_Signs">
+                                        <div *ngFor="let pickupSigns of pickupLoc.pickup_Signs">
+                                            <img src="{{pickupSigns.image_name}}" height="50%" width="50%">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12 mb-2">
+                        <table class="table table-sm" id="tblJobMaster" width="100%" cellspacing="0">
+                            <thead style="text-align: left;">
+                                <th style="border: 0px;width: 30%;text-align: left;">Delivery Details</th>
+                                <th style="border: 0px;width: 40%;text-align: left;">Delivery Images</th>
+                                <th style="border: 0px;width: 30%;text-align: left;">Delivery Signature</th>
+                            </thead>
+                            <tbody style="text-align: left;">
+                                <tr *ngFor="let deliveryLoc of _objclientJobMaster.delivery_location; let i = index"
+                                    [attr.data-index]="i">
+                                    <td>
+                                        <span><b><u>Delivery Location #{{i + 1}}</u></b></span><br />
+                                        <span>
+                                            {{deliveryLoc.line1}}, {{deliveryLoc.city}}, <br />
+                                            {{deliveryLoc.state}}, {{deliveryLoc.country}}, <br />
+                                            {{deliveryLoc.postal_code}}
+                                        </span><br />
+                                        <span><b>Pickup Datetime:</b>{{deliveryLoc.staff_pick_up_date}} </span><br />
+                                        <span><b>Delivery Datetime:</b>{{deliveryLoc.staff_delivery_date}} </span><br />
+                                        <span><b>Delivery Person:</b>{{deliveryLoc.name}} </span>
+                                    </td>
+                                    <td>
+                                        <div *ngFor="let deliveryImgPath of deliveryLoc.deliveryImages">
+                                            <img src="{{deliveryImgPath.image_name}}" height="20%" width="25%">
+                                        </div>
+                                    </td>
+                                    <td style="width: 30%;text-align: left;" *ngIf="deliveryLoc.deliverySigns">
+                                        <div *ngFor="let deliverySigns of deliveryLoc.deliverySigns">
+                                            <img src="{{deliverySigns.image_name}}" height="50%" width="50%">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <!-- <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Print"
+                            style="margin-left: 8px;cursor: pointer;" (click)="PrintPage()">
+                            <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                            Print
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0.5rem 1rem; background-color: #f8f9fc;">
+                <button printTitle="Job Detail" class="btn btn-primary btn-sm" [useExistingCss]="true"
+                    printSectionId="Print_Job_Details" ngxPrint>
+                    <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

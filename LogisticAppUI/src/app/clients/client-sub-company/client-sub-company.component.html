@@ -1,0 +1,34 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Sub Company Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Name" #Name="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.name"
+                class="form-control" placeholder="Client Name" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Phone</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.phone" class="form-control"
+                placeholder="xxxxxxxxxx" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Address</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Address" #Address="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.address" class="form-control"
+                placeholder="Address" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save changes</button>
+            <!-- <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-warning" style="margin-left: 1%;">Clear</button> -->
+        </div>
+    </form>
+</div>

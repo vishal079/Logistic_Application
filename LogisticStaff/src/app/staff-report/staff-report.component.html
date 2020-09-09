@@ -1,0 +1,86 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">Job Report</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button (click)="ExportTOExcel()" class="btn btn-success btn-sm mb-2"
+                    style="float: right;margin-left: 1%;">ExportTOExcel</button>
+
+                <button printTitle="Job Report" class="btn btn-primary btn-sm" style="float: right;margin-left: 1%;"
+                    [useExistingCss]="true" printSectionId="Print_Job_Report" ngxPrint>
+                    <i _ngcontent-cjx-c2="" class="fas fa-print" style="cursor: pointer;"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" #TABLE #table id="Print_Job_Report">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width: 2%;">No</th>
+                        <th style="width: 8%;">Job Order No.</th>
+                        <th style="width: 6%;">Client Name</th>
+                        <th style="width: 15%;">Pickup Address</th>
+                        <th style="width: 15%;">Delivery Address</th>
+                        <th style="width: 6%;">Assign Date</th>
+                        <th style="width: 6%;">Delivery Date</th>
+                        <th style="width: 6%;">Pickup Contact</th>
+                        <th style="width: 6%;">Delivery Contact</th>
+                        <th style="width: 6%;">Status</th>
+                        <th style="width: 6%;">Is Multipoint</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of manageJobService.listClientJob 
+                                let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>
+                            {{client.item_id}}
+                        </td>
+                        <td>{{client.name}}</td>
+                        <td>{{client.line1}}, {{client.city}}, {{client.state}}, {{client.country}},
+                            {{client.postal_code}}</td>
+                        <td>{{client.deliveryLocation[0].line1}}, {{client.deliveryLocation[0].city}},
+                            {{client.deliveryLocation[0].state}}, {{client.deliveryLocation[0].country}},
+                            {{client.deliveryLocation[0].postal_code}}
+                        </td>
+                        <td>{{client.assign_date}}</td>
+                        <td>{{client.delivery_date}}</td>
+                        <td>{{client.contactPersonName}} </td>
+                        <td>{{client.deliveryLocation[0].name}}, {{client.deliveryLocation[0].phone}}</td>
+                        <td>
+                            <!-- {{client.job_status}} -->
+                            <span *ngIf="client.job_status == 0;">
+                                Waiting to assign
+                            </span>
+                            <span *ngIf="client.job_status == 1;">
+                                Assigned
+                            </span>
+                            <span *ngIf="client.job_status == 2;">
+                                Picked up
+                            </span>
+                            <span *ngIf="client.job_status == 3;">
+                                Partially delivered
+                            </span>
+                            <span *ngIf="client.job_status == 4;">
+                                Delivered
+                            </span>
+                            <span *ngIf="client.job_status == 5;">
+                                Cancelled
+                            </span>
+                        </td>
+                        <td>
+                            <span *ngIf="client.is_multi_location_delivery == 1">Yes</span>
+                            <span *ngIf="client.is_multi_location_delivery == 0">No</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

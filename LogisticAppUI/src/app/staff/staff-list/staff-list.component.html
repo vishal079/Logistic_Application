@@ -1,0 +1,75 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-2">
+        <!-- <span class="font-weight-bold text-primary">List of Staff</span>
+        <button type="button" style="float: right;" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal" (click)="createStaff($event)">
+            Add Staff Member</button> -->
+
+        <div class="row">
+            <div class="col-md-8">
+                <h6 class="font-weight-bold text-primary">List of Staff</h6>
+            </div>
+            <div class="col-md-4">
+                <button id="openModalButton" type="button" style="float: right;" class="btn btn-primary btn-sm"
+                    data-toggle="modal" data-target="#exampleModal" (click)="createStaff($event)">
+                    <i class="fas fa-plus"></i>
+                    Add Staff Member</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>vehicle assigned</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let staff of staffService.listStaff 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>{{staff.name}}</td>
+                        <td>{{staff.email}}</td>
+                        <td>{{staff.phone}}</td>
+                        <td>{{staff.number}}</td>
+                        <td>
+                            <button type="button" class="btn btn-wsh" (click)="bindStaff($event, staff)" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <i _ngcontent-cjx-c2="" class="fas fa-edit fa-wsh-edit" style="cursor: pointer;"></i>
+                            </button>
+                            <button type="button" class="btn btn-wsh" (click)="inActiveStaff($event, staff.id)"
+                                style="margin-left: 5%;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-trash fa-wsh-trash" style="cursor: pointer;"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{manage_staff_popup_name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-staff-master></app-staff-master>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,83 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="font-weight-bold text-primary">List of Delivery Address</h5>
+            </div>
+            <div class="col-md-3 flex-row">
+                <button id="openModalButton" type="button" style="float: right;" class="btn btn-primary btn-sm"
+                    data-toggle="modal" data-target="#exampleModal" (click)="createAddress($event)">
+                    <i class="fas fa-plus"></i>
+                    Create Address</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Blk No/No</th>
+                        <!-- <th>Address Line 2</th> -->
+                        <th>Street/Road Name</th>
+                        <th>Floor No/Unit No</th>
+                        <!-- <th>Country</th> -->
+                        <th>Postal Code</th>
+                        <!-- <th>Phone</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let address of clientAddressMasterService.listClientDeliveryAddress 
+                        let indexofelement=index">
+                        <td>{{indexofelement+1}}</td>
+                        <td>
+                            {{address.line1}}
+                        </td>
+                        <!-- <td>{{address.line2}}</td> -->
+                        <td>
+                            {{address.city}}
+                        </td>
+                        <td>{{address.state}}</td>
+                        <!-- <td>{{address.country}}</td> -->
+                        <td>{{address.postal_code}}</td>
+                        <!-- <td>{{address.phone}}</td> -->
+                        <td>
+                            <button type="button" class="btn btn-wsh" data-toggle="modal" title="Edit"
+                                data-target="#exampleModal" (click)="bindAddress($event, address)"
+                                style="margin-left: 8px;" *ngIf="address.is_main != '1'">
+                                <i _ngcontent-cjx-c2="" class="fas fa-edit fa-wsh-edit" style="cursor: pointer;"></i>
+                            </button>
+                            &nbsp;
+                            <button type="button" class="btn btn-wsh" *ngIf="address.is_main != '1'"
+                                (click)="inActiveAddress($event, address.client_id, address.id, address.name)"
+                                title="Delete" style="margin-left: 8px;">
+                                <i _ngcontent-cjx-c2="" class="fas fa-trash fa-wsh-ban" style="cursor: pointer;"></i>
+                            </button>
+                            <span *ngIf="address.is_main == '1'">Default</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-md" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 0.50rem !important;">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Delivery Address</h5>
+                    <button type="button" id="closebutton" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-client-delivery-address></app-client-delivery-address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

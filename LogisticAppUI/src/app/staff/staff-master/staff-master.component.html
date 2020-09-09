@@ -1,0 +1,56 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="StaffName" #StaffName="ngModel" [(ngModel)]="staffService.formStaff.name" class="form-control"
+                placeholder="Staff Member Name" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Email Address</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Email" #Email="ngModel" [(ngModel)]="staffService.formStaff.email" class="form-control"
+                placeholder="client@gmail.com" required maxlength="100" required style="width: 80%">
+        </div>
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Password</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input type="password" name="password" #Password="ngModel" [(ngModel)]="staffService.formStaff.password"
+                class="form-control" placeholder="password" required maxlength="100" required style="width: 80%">
+        </div>
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Phone Number</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="staffService.formStaff.phone" class="form-control"
+                placeholder="XXXXXXXX" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2  col-md-3">
+            <label for="">Vehicle</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <select class="form-control" id="vehicle_id" name="vehicle_id" #vehicle_id="ngModel"
+                [(ngModel)]="staffService.formStaff.vehicle_id" [value]='staffService.formStaff.vehicle_id'
+                style="width: 80%">
+                <option value="">Choose Vehicle</option>
+                <option *ngFor="let Vehicle of staffService.listVehicle" [ngValue]="Vehicle.id" value="{{Vehicle.id}}"
+                    [selected]="Vehicle.id === staffService.formStaff.vehicle_id">
+                    {{Vehicle.number}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save changes</button>
+        </div>
+    </form>
+</div>
