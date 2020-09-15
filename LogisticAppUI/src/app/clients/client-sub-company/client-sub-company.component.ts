@@ -33,7 +33,9 @@ export class ClientSubCompanyComponent implements OnInit {
       name: "",
       address: "",
       phone: "",
-      client_id: ""
+      client_id: "",
+      email: '',
+      password: ''
     };
     //this._eventDateTime = new Date();
   }

@@ -4,6 +4,8 @@ export class ClientSubCompanyModule {
   name: string;
   phone: string;
   address: string;
+  email: string;
+  password: string;
 }
 
 export class listParentCompany {

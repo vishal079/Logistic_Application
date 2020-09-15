@@ -8,18 +8,33 @@
                 class="form-control" placeholder="Client Name" required maxlength="100" required style="width: 80%">
         </div>
         <div class="form-group mb-2 col-md-3">
+            <label for="">Email</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Email" #Email="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.email"
+                class="form-control" placeholder="Email" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Password</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Password" type="password" #Password="ngModel"
+                [(ngModel)]="clientSubCompanyService.formClientSubCompany.password" class="form-control"
+                placeholder="Password" required maxlength="100" style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
             <label for="">Phone</label>
         </div>
         <div class="form-group mb-2 col-md-9">
-            <input name="Phone" #Phone="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.phone" class="form-control"
-                placeholder="xxxxxxxxxx" required maxlength="100" required style="width: 80%">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.phone"
+                class="form-control" placeholder="xxxxxxxxxx" required maxlength="100" required style="width: 80%">
         </div>
         <div class="form-group mb-2 col-md-3">
             <label for="">Address</label>
         </div>
         <div class="form-group mb-2 col-md-9">
-            <input name="Address" #Address="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.address" class="form-control"
-                placeholder="Address" required maxlength="100" required style="width: 80%">
+            <input name="Address" #Address="ngModel" [(ngModel)]="clientSubCompanyService.formClientSubCompany.address"
+                class="form-control" placeholder="Address" required maxlength="100" required style="width: 80%">
         </div>
         <div class="form-group mb-2 col-md-3">
             &nbsp;

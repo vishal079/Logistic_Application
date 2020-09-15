@@ -34,12 +34,14 @@ export class ClientSubCompanyMasterService {
   }
 
   postSubCompany() {
-    debugger;
+    /* debugger; */
     let formData: FormData = new FormData();
     formData.append('name', this.formClientSubCompany.name);
     formData.append('phone', this.formClientSubCompany.phone);
     formData.append('address', this.formClientSubCompany.address);
     formData.append('client_id', this.selectedParentCompany);
+    formData.append('email', this.formClientSubCompany.email);
+    formData.append('password', this.formClientSubCompany.password);
     return this.http.post(this.eventRootURL + '/api/add/client_company', formData);
   }
 
