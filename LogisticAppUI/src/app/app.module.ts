@@ -47,6 +47,7 @@ import { ReportStaffComponent } from './report-staff/report-staff.component';
 import { ReportVehicleComponent } from './report-vehicle/report-vehicle.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { ResetPasswordComponent } from './admin-profile/reset-password.component'
+import { ResetCompanyPasswordComponent } from './reset-company-password/reset-company-password.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ResetPasswordComponent } from './admin-profile/reset-password.component
     ClientSubCompanyListComponent,
     AssignJobComponent,
     ResetClientPasswordComponent,
+    ResetCompanyPasswordComponent,
     ManageJobComponent,
     NotificationComponent,
     ReportJobComponent,

@@ -10,6 +10,8 @@ import { ClientSubCompanyMasterService } from 'src/app/_services/client-sub-comp
 })
 export class ClientSubCompanyListComponent implements OnInit {
 
+  clientId = '';
+  companyId = '';
   constructor(private http: HttpClient, public clientSubCompanyService: ClientSubCompanyMasterService, private toastr: ToastrService) {
   }
 
@@ -51,5 +53,10 @@ export class ClientSubCompanyListComponent implements OnInit {
 
   onParentCompanyChange(client_id) {
     this.clientSubCompanyService.getAllSubCompany(client_id)
+  }
+
+  openResetPasswordModel(company) {
+    this.clientId = company.client_id;
+    this.companyId = company.id;
   }
 }

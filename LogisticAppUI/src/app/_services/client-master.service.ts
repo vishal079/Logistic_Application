@@ -86,4 +86,13 @@ export class ClientMasterService {
     formData.append('new_password', form.value.Password);
     return this.http.post(this.eventRootURL + '/api/change/client_password', formData);
   }
+
+  resetCompanyPassword(form: NgForm) {
+    //debugger;
+    let formData: FormData = new FormData();
+    formData.append('client_id', form.value.client_id);
+    formData.append('company_id', form.value.company_id);
+    formData.append('new_password', form.value.Password);
+    return this.http.post(this.eventRootURL + '/api/reset/company', formData);
+  }
 }

@@ -34,8 +34,10 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Phone</th>
                         <th>Address</th>
+                        <th style="width: 10%;">Reset Password</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,8 +46,16 @@
                         let indexofelement=index">
                         <td>{{indexofelement+1}}</td>
                         <td>{{subCompany.name}}</td>
+                        <td>{{subCompany.email}}</td>
                         <td>{{subCompany.phone}}</td>
                         <td>{{subCompany.address}}</td>
+                        <td>
+                            <button type="button" class="btn btn-wsh btn-link" data-toggle="modal"
+                                title="Reset Password" (click)="openResetPasswordModel(subCompany)"
+                                data-target="#resetPassword">
+                                Reset
+                            </button>
+                        </td>
                         <td>
                             <!-- <button type="button" class="btn" (click)="bindClient($event, subCompany.id)">
                                 <i _ngcontent-cjx-c2="" class="fas fa-edit fa-sm text-black-50"
@@ -81,6 +91,24 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="resetPassword" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reset password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-reset-company-password [companyId]="companyId" [clientId]="clientId">
+                    </app-reset-company-password>
+                </div>
             </div>
         </div>
     </div>
