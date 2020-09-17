@@ -20,10 +20,9 @@ export class ClientSubCompanyListComponent implements OnInit {
   }
 
   inActiveClient(event, clientId) {
-    if (confirm("Are you sure you want to delete client?")) {
+    if (confirm("Are you sure you want to delete the company?")) {
       this.clientSubCompanyService.deleteSubCompany(clientId).subscribe(
         (res: any) => {
-          debugger;
           if (res.message == 'Client company deleted successfully') {
             this.toastr.success("", res.message);
             this.clientSubCompanyService.refreshList();
@@ -52,7 +51,7 @@ export class ClientSubCompanyListComponent implements OnInit {
   }
 
   onParentCompanyChange(client_id) {
-    this.clientSubCompanyService.getAllSubCompany(client_id)
+    this.clientSubCompanyService.getAllSubCompany(client_id);
   }
 
   openResetPasswordModel(company) {

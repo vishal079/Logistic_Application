@@ -93,6 +93,6 @@ export class ClientMasterService {
     formData.append('client_id', form.value.client_id);
     formData.append('company_id', form.value.company_id);
     formData.append('new_password', form.value.Password);
-    return this.http.post(this.eventRootURL + '/api/reset/company', formData);
+    return this.http.post(this.eventRootURL + '/api/client/reset/company', formData);
   }
 }

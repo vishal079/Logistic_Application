@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './client-profile/reset-password/reset-pa
 import { AuthGuard } from './_guard/auth.guard';
 import { ListClientDeliveryAddressComponent } from './client-address/client-delivery-address/list-client-delivery-address.component';
 import { ReportJobComponent } from './report-job/report-job.component';
+import { ClientSubCompanyListComponent } from './client-sub-company-list/client-sub-company-list.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'LogisticClient/', redirectTo: "/clientLogin", pathMatch: 'full' },
   { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'ListClientJobs', component: ListClientJobComponent, canActivate: [AuthGuard] },
+  { path: 'ManageSubCompany', component: ClientSubCompanyListComponent, canActivate: [AuthGuard] },
   { path: 'ManageClientContact', component: ListClientContactComponent, canActivate: [AuthGuard] },
   { path: 'ManageClientAddress', component: ListClientAddressComponent, canActivate: [AuthGuard] },
   { path: 'ManageClientDeliveryAddress', component: ListClientDeliveryAddressComponent, canActivate: [AuthGuard] },

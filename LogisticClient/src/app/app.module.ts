@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { AuthenticationService } from './_services/authentication.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -30,6 +29,8 @@ import { ChartsModule } from 'ng2-charts';
 import { ListClientDeliveryAddressComponent } from './client-address/client-delivery-address/list-client-delivery-address.component';
 import { ClientDeliveryAddressComponent } from './client-address/client-delivery-address/client-delivery-address.component';
 import { ReportJobComponent } from './report-job/report-job.component';
+import { ClientSubCompanyListComponent } from './client-sub-company-list/client-sub-company-list.component';
+import { ResetCompanyPasswordComponent } from './reset-company-password/reset-company-password.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { ReportJobComponent } from './report-job/report-job.component';
     ListClientDeliveryAddressComponent,
     ClientDeliveryAddressComponent,
     ReportJobComponent,
+    ClientSubCompanyListComponent,
+    ResetCompanyPasswordComponent
   ],
   imports: [
     NgxSpinnerModule,
