@@ -1,5 +1,6 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="status ? 'toggled' : ''" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="status ? 'toggled' : ''"
+  id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html"
@@ -42,6 +43,21 @@
     <div id="collapseJob" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" routerLinkActive="active" routerLink="AssignJobs">Assign Jobs</a>
+      </div>
+    </div>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true"
+      aria-controls="collapseAdmin">
+      <i class="far fa-address-book"></i>
+      <span>Admins</span>
+    </a>
+    <div id="collapseAdmin" class="collapse" aria-labelledby="admin" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <!-- <h6 class="collapse-header">Add Attendance</h6> -->
+        <!-- <a class="collapse-item" routerLinkActive="active" routerLink="ManageClient">Manage Client</a> -->
+        <a class="collapse-item" routerLinkActive="active" routerLink="ViewAdmin">Manage Admins</a>
       </div>
     </div>
   </li>

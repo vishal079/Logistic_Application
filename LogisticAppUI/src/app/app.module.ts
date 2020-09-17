@@ -48,7 +48,9 @@ import { ReportVehicleComponent } from './report-vehicle/report-vehicle.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { ResetPasswordComponent } from './admin-profile/reset-password.component'
 import { ResetCompanyPasswordComponent } from './reset-company-password/reset-company-password.component';
-
+import { AdminListComponent } from './admins/admin-list/admin-list.component';
+import { AdminMasterComponent } from './admins/admin-master/admin-master.component';
+import { ResetAdminPasswordComponent } from './reset-admin-password/reset-admin-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +77,9 @@ import { ResetCompanyPasswordComponent } from './reset-company-password/reset-co
     ReportVehicleComponent,
     AdminProfileComponent,
     ResetPasswordComponent,
+    AdminListComponent,
+    AdminMasterComponent,
+    ResetAdminPasswordComponent
   ],
   imports: [
     NgxSpinnerModule,

@@ -1,0 +1,66 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <!-- <div class="form-group mb-2  col-md-2">
+            <label for="">Assembly</label>
+        </div>
+        <div class="form-group mb-2 col-md-10">
+            <select class="form-control" id=AssemblyId name="AssemblyId" #AssemblyId="ngModel"
+                [(ngModel)]="adminService.formEvent.AssemblyId" style="width: 50%">
+                <option value="">Choose your Assembly</option>
+                <option *ngFor="let assembly of adminService.listAssembly" [ngValue]="assembly.Id"
+                    value="{{assembly.Id}}">
+                    {{assembly.Name}}
+                </option>
+            </select>
+        </div> -->
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Admin Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Admin Type</label>
+            <select class="form-control-sm" id="FilterStatus" name="AdminType" #AdminType="ngModel"
+                [(ngModel)]="adminService.formEvent.AdminType" style="width: 98%">
+                <option [ngValue]="1" value="1" selected>Super Admin</option>
+                <option [ngValue]="0" value="0">Sub Admin</option>
+            </select>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="AdminName" #AdminName="ngModel" [(ngModel)]="adminService.formEvent.name" class="form-control"
+                placeholder="Admin Name" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Email Address {{is_edit}}</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Email" #Email="ngModel" [(ngModel)]="adminService.formEvent.email" class="form-control"
+                placeholder="admin@gmail.com" required maxlength="100" required style="width: 80%" [readonly]="is_edit">
+        </div>
+
+        <div class="form-group mb-2 col-md-3" *ngIf="!is_edit">
+            <label for="">Password</label>
+        </div>
+        <div class="form-group mb-2 col-md-9" *ngIf="!is_edit">
+            <show-hide-password btnStyle="primary" [btnOutline]="false" style="width: 80%">
+                <input type="password" name="password" #Password="ngModel" [(ngModel)]="adminService.formEvent.password"
+                    class="form-control" placeholder="password" required maxlength="100" required style="width: 80%">
+            </show-hide-password>
+        </div>
+
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Phone Number</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="adminService.formEvent.phone" class="form-control"
+                placeholder="XXXXXXXX" required maxlength="100" required style="width: 80%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save changes</button>
+            <!-- <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-warning" style="margin-left: 1%;">Clear</button> -->
+        </div>
+    </form>
+</div>

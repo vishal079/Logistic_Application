@@ -17,6 +17,8 @@ import { ReportClientComponent } from './report-client/report-client.component';
 import { ReportStaffComponent } from './report-staff/report-staff.component';
 import { ReportVehicleComponent } from './report-vehicle/report-vehicle.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AdminMasterComponent } from './admins/admin-master/admin-master.component';
+import { AdminListComponent } from './admins/admin-list/admin-list.component';
 
 
 
@@ -27,9 +29,11 @@ const routes: Routes = [
     data: { showHeader: false, showSidebar: false }
   },
   { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'ManageAdmin', component: AdminMasterComponent, canActivate: [AuthGuard] },
   { path: 'ManageClient', component: ClientMasterComponent, canActivate: [AuthGuard] },
   { path: 'ManageContact', component: ListClientContactComponent, canActivate: [AuthGuard] },
   { path: 'ManageSubCompany', component: ClientSubCompanyListComponent, canActivate: [AuthGuard] },
+  { path: 'ViewAdmin', component: AdminListComponent, canActivate: [AuthGuard] },
   { path: 'ViewClient', component: ClientListComponent, canActivate: [AuthGuard] },
   { path: 'ManageStaff', component: StaffListComponent, canActivate: [AuthGuard] },
   { path: 'ManageVehicle', component: VehicleListComponent, canActivate: [AuthGuard] },

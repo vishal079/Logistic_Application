@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
     this.service.login(formData).subscribe(
       (res: any) => {
-        debugger;
         console.log(res);
         if (res.status) {
           localStorage.setItem("token", res.token);
@@ -43,6 +42,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('adminPhone', res.data.phone);
           localStorage.setItem('adminName', res.data.name);
           localStorage.setItem('admin_id', res.data.id);
+          localStorage.setItem('is_super_admin', res.is_super_admin);
           this.router.navigateByUrl('Dashboard');
         }
         else {
