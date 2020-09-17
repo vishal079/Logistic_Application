@@ -1,0 +1,67 @@
+<div class="card shadow mb-4" style="margin: 1rem!important;">
+    <div class="card-header py-2">
+        <h5 class="font-weight-bold text-primary">Company Profile</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="mb-2 col-md-2">
+                <label for="">Name</label>
+            </div>
+            <div class="mb-2 col-md-10">
+                <label for="">{{CompanyProfile.name}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-2 col-md-2">
+                <label for="">Email</label>
+            </div>
+            <div class="mb-2 col-md-10">
+                <label for="">{{CompanyProfile.email}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-2 col-md-2">
+                <label for="">Contact No</label>
+            </div>
+            <div class="mb-2 col-md-10">
+                <label for="">{{CompanyProfile.phone}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-2 col-md-2">
+                <label for="">Address</label>
+            </div>
+            <div class="mb-2 col-md-10">
+                <label for="">{{CompanyProfile.address}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-2 col-md-2">
+                <label for="">Password</label>
+            </div>
+            <div class="mb-2 col-md-10">
+                <button id="openModalButton" type="button" style="float: left;" class="btn btn-primary btn-sm"
+                    data-toggle="modal" data-target="#exampleModal">
+                    Reset</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 0.5rem 1rem; background-color: #f8f9fc;">
+                    <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-reset-password></app-reset-password>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

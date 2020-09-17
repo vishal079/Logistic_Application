@@ -1,0 +1,65 @@
+<div class="col-md-12">
+    <form #form="ngForm" class="form-inline" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Block No/No {{clientAddressMasterService.formEvent.line1}} test</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="line1" #line1="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.line1"
+                class="form-control" placeholder="Block No/No" required maxlength="150" required style="width: 98%">
+        </div>
+        <!-- <div class="form-group mb-2 col-md-3">
+            <label for="">Address Line 2</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="line2" #line2="ngModel"
+                [(ngModel)]="clientAddressMasterService.formEvent.line2" class="form-control"
+                placeholder="Address Line 2" required maxlength="150" required style="width: 80%">
+        </div> -->
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Street/Road Name</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="city" #city="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.city"
+                class="form-control" placeholder="Street/Road Name" required maxlength="150" required
+                style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Floor No/Unit No</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="state" #state="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.state"
+                class="form-control" placeholder="Floor No/Unit No" required maxlength="150" required
+                style="width: 98%">
+        </div>
+        <div class="form-group mb-2 col-md-3">
+            <label for="">Postal Code</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="phone" #phone="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.postal_code"
+                class="form-control" placeholder="### ###" required maxlength="150" required style="width: 98%">
+        </div>
+        <!-- <div class="form-group mb-2 col-md-3">
+            <label for="">Country</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="country" #country="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.country"
+                class="form-control" placeholder="country" required maxlength="150" required
+                style="width: 80%">
+        </div> -->
+        <!-- <div class="form-group mb-2 col-md-3">
+            <label for="">Phone</label>
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <input name="Phone" #Phone="ngModel" [(ngModel)]="clientAddressMasterService.formEvent.phone"
+                class="form-control" placeholder="+#-###-###-####" required maxlength="150" required
+                style="width: 80%">
+        </div> -->
+        <div class="form-group mb-2 col-md-3">
+            &nbsp;
+        </div>
+        <div class="form-group mb-2 col-md-9">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Save</button>
+        </div>
+    </form>
+</div>
