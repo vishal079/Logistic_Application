@@ -96,6 +96,7 @@
                         <th style="width: 3%;">No</th>
                         <th style="width: 8%;">Job Order No.</th>
                         <th style="width: 11%;">Client</th>
+                        <th style="width: 11%;">Company</th>
                         <th style="width: 11%;">Delivery Type</th>
                         <th style="width: 11%;">Delivery Date</th>
                         <th style="width: 12%;">Delivery Status</th>
@@ -121,6 +122,9 @@
                                 title="Company Details" data-target="#exampleModal">
                                 <u>{{job.name}}</u>
                             </button> -->
+                        </td>
+                        <td>
+                            {{job.subCompanyName}}
                         </td>
                         <td>
                             <span *ngIf="job.delivery_type == 1;">

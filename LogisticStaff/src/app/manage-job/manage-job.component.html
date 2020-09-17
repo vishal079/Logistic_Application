@@ -128,6 +128,7 @@
                         <th style="width: 2%;">No</th>
                         <th style="width: 8%;">Job Order No.</th>
                         <th style="width: 6%;">Client Name</th>
+                        <th style="width: 6%;">Company Name</th>
                         <th style="width: 15%;">Pickup Address</th>
                         <th style="width: 15%;">Delivery Address</th>
                         <th style="width: 6%;">Assign Date</th>
@@ -136,7 +137,7 @@
                         <th style="width: 6%;">Delivery Contact</th>
                         <th style="width: 6%;">Status</th>
                         <th style="width: 6%;">Is Multipoint</th>
-                        <th style="width: 18%;"></th>
+                        <th style="width: 12%;"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -151,6 +152,7 @@
                             </button>
                         </td>
                         <td>{{client.name}}</td>
+                        <td>{{client.subCompanyName}}</td>
                         <td>{{client.line1}}, {{client.city}}, {{client.state}}, {{client.country}},
                             {{client.postal_code}}</td>
                         <td>{{client.deliveryLocation[0].line1}}, {{client.deliveryLocation[0].city}},
