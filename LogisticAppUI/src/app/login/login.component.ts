@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('adminPhone', res.data.phone);
           localStorage.setItem('adminName', res.data.name);
           localStorage.setItem('admin_id', res.data.id);
-          localStorage.setItem('is_super_admin', res.is_super_admin);
+          localStorage.setItem('is_super_admin', res.data.is_super_admin);
           this.router.navigateByUrl('Dashboard');
         }
         else {

@@ -4,7 +4,7 @@ export class adminMaster {
     phone: string;
     email: string;
     password: string;
-    AdminType: number;
+    AdminType: string;
     CreatedDate: string;
     CreatedBy: string;
     UpdatedDate: string;

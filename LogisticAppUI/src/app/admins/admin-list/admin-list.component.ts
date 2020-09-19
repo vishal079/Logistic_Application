@@ -25,6 +25,11 @@ export class AdminListComponent implements OnInit {
     this.adminService.getAllAdmins();
   }
 
+  isSuperAdmin(): string {
+    console.log(localStorage.getItem('is_super_admin'));
+    return localStorage.getItem('is_super_admin');
+  }
+
   inActiveAdmin(event, adminId) {
     if (confirm('Are you sure you want to delete admin?')) {
       this.adminService.deleteEventDetail(adminId).subscribe(
@@ -49,7 +54,7 @@ export class AdminListComponent implements OnInit {
       email: objAdmin.email,
       phone: objAdmin.phone,
       password: objAdmin.password,
-      AdminType: 0,
+      AdminType: objAdmin.is_super_admin,
       CreatedBy: '',
       CreatedDate: '',
       UpdatedBy: '',
@@ -67,7 +72,7 @@ export class AdminListComponent implements OnInit {
       email: '',
       phone: '',
       password: '',
-      AdminType: 0,
+      AdminType: '1',
       CreatedBy: '',
       CreatedDate: '',
       UpdatedBy: '',

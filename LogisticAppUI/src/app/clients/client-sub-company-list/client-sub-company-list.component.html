@@ -37,7 +37,6 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th style="width: 10%;">Reset Password</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -49,13 +48,6 @@
                         <td>{{subCompany.email}}</td>
                         <td>{{subCompany.phone}}</td>
                         <td>{{subCompany.address}}</td>
-                        <td>
-                            <button type="button" class="btn btn-wsh btn-link" data-toggle="modal"
-                                title="Reset Password" (click)="openResetPasswordModel(subCompany)"
-                                data-target="#resetPassword">
-                                Reset
-                            </button>
-                        </td>
                         <td>
                             <!-- <button type="button" class="btn" (click)="bindClient($event, subCompany.id)">
                                 <i _ngcontent-cjx-c2="" class="fas fa-edit fa-sm text-black-50"

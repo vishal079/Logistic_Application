@@ -360,6 +360,75 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-md-12" *ngIf="show">&nbsp;</div>
+                    <div class="col-md-12" *ngIf="show">
+                        <table class="table table-sm" width="100%" cellspacing="0">
+                            <thead>
+                                <th style="border: 0px;width: 30%;text-align: left;">Reschedule Details</th>
+                                <th style="border: 0px;width: 40%;text-align: left;">Reschedule Images</th>
+                                <th style="border: 0px;width: 30%;text-align: left;">Reschedule Signature</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let deliveryLocation of _objclientJobMaster.delivery_location">
+                                    <td style="width: 30%;text-align: left;">
+                                        <span><u><b>Pickup location:</b></u></span><br />
+                                        <span>
+                                            {{deliveryLocation.line1}}, {{deliveryLocation.city}} ,<br />
+                                            {{deliveryLocation.state}}, {{deliveryLocation.postal_code}}</span><br />
+                                        <span><u><b>Pickup Contact:</b></u></span><br />
+                                        <span>Delivery Contact Person : {{_objclientJobMaster.contactPersonName}}
+                                        </span>
+                                    </td>
+                                    <td style="width: 40%;text-align: left;">
+                                        <div *ngFor="let pickupImgPath of deliveryLocation.pickup_Images">
+                                            <img src="{{pickupImgPath.image_name}}" height="20%" width="25%">
+                                        </div>
+                                    </td>
+                                    <td style="width: 30%;text-align: left;" *ngIf="deliveryLocation.pickup_Signs">
+                                        <div *ngFor="let pickupSigns of deliveryLocation.pickup_Signs">
+                                            <img src="{{pickupSigns.image_name}}" height="50%" width="50%">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12" *ngIf="show">&nbsp;</div>
+                    <div class="col-md-12 mb-2" *ngIf="show">
+                        <table class="table table-sm" id="tblJobMaster" width="100%" cellspacing="0">
+                            <thead style="text-align: left;">
+                                <th style="border: 0px;width: 30%;text-align: left;">Return Details</th>
+                                <th style="border: 0px;width: 40%;text-align: left;">Return Images</th>
+                                <th style="border: 0px;width: 30%;text-align: left;">Return Signature</th>
+                            </thead>
+                            <tbody style="text-align: left;">
+                                <tr *ngFor="let deliveryLoc of _objclientJobMaster.delivery_location; let i = index"
+                                    [attr.data-index]="i">
+                                    <td>
+                                        <span><b><u>Delivery Location #{{i + 1}}</u></b></span><br />
+                                        <span>
+                                            {{deliveryLoc.line1}}, {{deliveryLoc.city}}, <br />
+                                            {{deliveryLoc.state}}, {{deliveryLoc.country}}, <br />
+                                            {{deliveryLoc.postal_code}}
+                                        </span><br />
+                                        <span><b>Pickup Datetime:</b>{{deliveryLoc.staff_pick_up_date}} </span><br />
+                                        <span><b>Delivery Datetime:</b>{{deliveryLoc.staff_delivery_date}} </span><br />
+                                        <span><b>Delivery Person:</b>{{deliveryLoc.name}} </span>
+                                    </td>
+                                    <td>
+                                        <div *ngFor="let deliveryImgPath of deliveryLoc.returnImages">
+                                            <img src="{{deliveryImgPath.image_name}}" height="20%" width="25%">
+                                        </div>
+                                    </td>
+                                    <td style="width: 30%;text-align: left;" *ngIf="deliveryLoc.deliverySigns">
+                                        <div *ngFor="let deliverySigns of deliveryLoc.deliverySigns">
+                                            <img src="{{deliverySigns.image_name}}" height="50%" width="50%">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12 mb-2">
                         <table class="table table-sm" id="tblJobMaster" width="100%" cellspacing="0">
@@ -391,6 +460,30 @@
                                         <div *ngFor="let deliverySigns of deliveryLoc.deliverySigns">
                                             <img src="{{deliverySigns.image_name}}" height="50%" width="50%">
                                         </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12 mb-2">
+                        <table class="table table-sm" id="tblJobMaster" width="100%" cellspacing="0">
+                            <thead style="text-align: left;">
+                                <th style="border: 0px;width: 30%;text-align: left;">Log Type</th>
+                                <th style="border: 0px;width: 40%;text-align: left;">Log Description</th>
+                                <th style="border: 0px;width: 30%;text-align: left;">Created Date Time</th>
+                            </thead>
+                            <tbody style="text-align: left;">
+                                <tr *ngFor="let deliveryLog of _objclientJobMaster.delivery_log; let i = index"
+                                    [attr.data-index]="i">
+                                    <td>
+                                        <span><b><u>{{getLogType(deliveryLog.log_type)}}</u></b></span>
+                                    </td>
+                                    <td>
+                                        <span>{{deliveryLog.description}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{deliveryLog.created_at | date : 'short'}}</span>
                                     </td>
                                 </tr>
                             </tbody>

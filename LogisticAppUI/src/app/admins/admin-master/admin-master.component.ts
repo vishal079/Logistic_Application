@@ -37,7 +37,7 @@ export class AdminMasterComponent implements OnInit {
       email: '',
       phone: '',
       password: '',
-      AdminType: 0,
+      AdminType: '1',
       CreatedBy: '',
       CreatedDate: '',
       UpdatedBy: '',

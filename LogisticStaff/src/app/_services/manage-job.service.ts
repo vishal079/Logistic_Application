@@ -14,44 +14,95 @@ export class ManageJobService {
   readonly eventRootURL = environment.baseUrl;
 
   bindAssignedJobs(status, deliveryDate) {
-    //debugger;
+    // debugger;
     this.spinner.show();
-    let formData: FormData = new FormData();
-    if (status != null && status != "") {
+    const formData: FormData = new FormData();
+    if (status != null && status != '') {
       formData.append('status', status);
     }
-    if (deliveryDate != null && deliveryDate != "") {
+    if (deliveryDate != null && deliveryDate != '') {
       formData.append('deliveryDate', deliveryDate);
     }
     this.http.post(this.eventRootURL + '/api/staff/get/job', formData).toPromise()
       .then((res: any) => {
-        debugger;
+
         if (res.data != null && res.data.length > 0) {
           for (let index = 0; index < res.data.length; index++) {
+
+            const currentJob = res.data[index];
+            let deliveredItems = 0;
+            let rescheduledItems = 0;
+            let cancelledItems = 0;
             for (let locationIndex = 0; locationIndex < res.data[index].deliveryLocation.length; locationIndex++) {
               res.data[index].deliveryLocation[locationIndex].isSelected = false;
+              const deliveryLocationDetails = res.data[index].deliveryLocation[locationIndex];
+
+              if (deliveryLocationDetails.delivery_status === '2') {
+                deliveredItems++;
+              }
+              if (deliveryLocationDetails.delivery_status === '3') {
+                rescheduledItems++;
+              }
+              if (deliveryLocationDetails.delivery_status === '4') {
+                cancelledItems++;
+                console.log('cancelledItems:', cancelledItems);
+              }
             }
+
+            res.data[index].jobStatusDetails = {};
+            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, cancelledItems };
           }
           this.listClientJob = res.data;
-        }
-        else {
-          this.listClientJob = []
+          console.log('this.listClientJob 55', this.listClientJob);
+        } else {
+          this.listClientJob = [];
         }
         this.spinner.hide();
-      })
+      });
   }
 
   bindDashboard() {
     this.spinner.show();
     this.http.post(this.eventRootURL + '/api/staff/get/job', null).toPromise()
       .then((res: any) => {
-        this.listClientJob = res.data;
+        if (res.data != null && res.data.length > 0) {
+          for (let index = 0; index < res.data.length; index++) {
+
+            const currentJob = res.data[index];
+            console.log('currentJob ', currentJob);
+            let deliveredItems = 0;
+            let rescheduledItems = 0;
+            let cancelledItems = 0;
+            for (let locationIndex = 0; locationIndex < res.data[index].deliveryLocation.length; locationIndex++) {
+              res.data[index].deliveryLocation[locationIndex].isSelected = false;
+              const deliveryLocationDetails = res.data[index].deliveryLocation[locationIndex];
+
+              console.log('deliveryLocationDetails: ', deliveryLocationDetails);
+              if (deliveryLocationDetails.delivery_status === '2') {
+                deliveredItems++;
+              } else if (deliveryLocationDetails.delivery_status === '3') {
+                rescheduledItems++;
+              } else if (deliveryLocationDetails.delivery_status === '4') {
+                cancelledItems++;
+                console.log('cancelledItems:', cancelledItems);
+              }
+            }
+
+            res.data[index].jobStatusDetails = {};
+            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, cancelledItems };
+            console.log('res.data[index].jobStatusDetails: ', res.data[index].jobStatusDetails);
+          }
+          this.listClientJob = res.data;
+          console.log('this.listClientJob1', this.listClientJob);
+        } else {
+          this.listClientJob = [];
+        }
         this.spinner.hide();
-      })
+      });
   }
 
   updateStatus(objJob, acceptStatus) {
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('job_id', objJob.id);
     formData.append('staff_id', objJob.staff_id);
     formData.append('is_accept', acceptStatus);

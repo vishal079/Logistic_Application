@@ -29,8 +29,8 @@
                         <th style="width: 10%;">Street/Road Name</th>
                         <th style="width: 10%;">Floor No/Unit No</th>
                         <th style="width: 10%;">Postal Code</th>
-                        <th style="width: 10%;">Reset Password</th>
-                        <th style="width: 9%;"></th>
+                        <th style="width: 10%;" *ngIf="isSuperAdmin() === '1'">Reset Password</th>
+                        <th style="width: 9%;" *ngIf="isSuperAdmin() === '1'"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,14 +44,14 @@
                         <td>{{admin.city}}</td>
                         <td>{{admin.state}}</td>
                         <td>{{admin.postal_code}}</td>
-                        <td>
+                        <td *ngIf="isSuperAdmin() === '1'">
                             <button type="button" class="btn btn-wsh btn-link" data-toggle="modal"
                                 title="Reset Password" (click)="openResetPasswordModel(admin)"
                                 data-target="#resetPassword">
                                 Reset
                             </button>
                         </td>
-                        <td>
+                        <td *ngIf="isSuperAdmin() === '1'">
                             <button type="button" class="btn btn-wsh" data-toggle="modal" title="Edit"
                                 data-target="#exampleModal" (click)="bindAdmin($event, admin)" style="margin-left: 1%;">
                                 <i _ngcontent-cjx-c2="" class="fas fa-edit fa-wsh-edit" style="cursor: pointer;"></i>

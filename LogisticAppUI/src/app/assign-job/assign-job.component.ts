@@ -29,6 +29,7 @@ export class AssignJobComponent implements OnInit {
   isCollapsed = true;
   report_currentDateTime = new Date();
   mamage_job_popup_name = "Manage Job";
+  show = false;
 
   constructor(private http: HttpClient, public assignJob: AssignJobMasterService,
     public clientSubCompanyService: ClientSubCompanyMasterService, public staffService: StaffMasterService,
@@ -194,6 +195,21 @@ export class AssignJobComponent implements OnInit {
     this.mamage_job_popup_name = "Duplicate Job";
   }
 
+  getLogType(logType: string) {
+    let logtypeLabel = '';
+    if (logType === '1') {
+      logtypeLabel = 'Pickup';
+    } else if (logType === '2') {
+      logtypeLabel = 'Delivery';
+    } else if (logType === '3') {
+      logtypeLabel = 'Reschedule';
+    } else if (logType === '4') {
+      logtypeLabel = 'Cancel';
+    }
+
+    return logtypeLabel;
+  }
+
   showJobDetails(e, objJob) {
     debugger;
     var pickupSignPath = "";
@@ -205,6 +221,10 @@ export class AssignJobComponent implements OnInit {
       var pickup_Signs = objJob.image.filter(this.filterPickupSings);
       var delivery_Images = objJob.image.filter(this.filterDeliveryImages);
       var delivery_Signs = objJob.image.filter(this.filterDeliverySings);
+      var rescheduleImages = objJob.image.filter(this.filterRescheduleImages);
+      var returnImages = objJob.image.filter(this.filterReturnImages);
+      var returnSigns = objJob.image.filter(this.filterReturnSigns);
+
       var pickupDetails = {
         line1: objJob.line1, city: objJob.city,
         state: objJob.state, country: objJob.country,
@@ -215,6 +235,9 @@ export class AssignJobComponent implements OnInit {
       for (let i = 0; i < objJob.deliveryLocation.length; i++) {
         objJob.deliveryLocation[i].deliveryImages = [];
         objJob.deliveryLocation[i].deliverySigns = [];
+        objJob.deliveryLocation[i].rescheduleImages = [];
+        objJob.deliveryLocation[i].returnImages = [];
+        objJob.deliveryLocation[i].returnSigns = [];
 
         for (let j = 0; j < delivery_Images.length; j++) {
           if (delivery_Images[j].job_delivery_id == objJob.deliveryLocation[i].id) {
@@ -226,6 +249,22 @@ export class AssignJobComponent implements OnInit {
             objJob.deliveryLocation[i].deliverySigns.push(delivery_Signs[j]);
           }
         }
+        for (let j = 0; j < rescheduleImages.length; j++) {
+          if (rescheduleImages[j].job_delivery_id == objJob.deliveryLocation[i].id) {
+            objJob.deliveryLocation[i].deliverySigns.push(rescheduleImages[j]);
+          }
+        }
+        for (let j = 0; j < returnImages.length; j++) {
+          if (returnImages[j].job_delivery_id == objJob.deliveryLocation[i].id) {
+            objJob.deliveryLocation[i].deliverySigns.push(returnImages[j]);
+          }
+        }
+        for (let j = 0; j < returnSigns.length; j++) {
+          if (returnSigns[j].job_delivery_id == objJob.deliveryLocation[i].id) {
+            objJob.deliveryLocation[i].deliverySigns.push(returnSigns[j]);
+          }
+        }
+
       }
     }
     var staff_delivery_date = objJob.deliveryLocation[objJob.deliveryLocation.length - 1].staff_delivery_date;
@@ -235,6 +274,7 @@ export class AssignJobComponent implements OnInit {
       job_title: objJob.item_details,
       is_multi_location: (objJob.is_multi_location_delivery == "0") ? 'No' : 'Yes',
       delivery_location: objJob.deliveryLocation,
+      delivery_log: objJob.deliveryLog,
       job_status: objJob.job_status,
       job_type: objJob.jobTypeLabel,
       delivery_date: objJob.delivery_date,
@@ -266,6 +306,30 @@ export class AssignJobComponent implements OnInit {
   filterDeliverySings(element, index, array) {
     var BaseImagePath = environment.baseUrl + "/uploads/";
     if (element.image_type == "4") {
+      element.image_name = BaseImagePath + element.image_name;
+      return element;
+    }
+  }
+
+  filterRescheduleImages(element, index, array) {
+    var BaseImagePath = environment.baseUrl + "/uploads/";
+    if (element.image_type == "7") {
+      element.image_name = BaseImagePath + element.image_name;
+      return element;
+    }
+  }
+
+  filterReturnImages(element, index, array) {
+    var BaseImagePath = environment.baseUrl + "/uploads/";
+    if (element.image_type == "6") {
+      element.image_name = BaseImagePath + element.image_name;
+      return element;
+    }
+  }
+
+  filterReturnSigns(element, index, array) {
+    var BaseImagePath = environment.baseUrl + "/uploads/";
+    if (element.image_type == "6") {
       element.image_name = BaseImagePath + element.image_name;
       return element;
     }
