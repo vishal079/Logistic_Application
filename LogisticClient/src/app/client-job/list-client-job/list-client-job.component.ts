@@ -26,6 +26,23 @@ export class ListClientJobComponent implements OnInit {
     this.clientService.getAllClientJobs(null, null);
   }
 
+  getLogType(logType: string) {
+    let logtypeLabel = '';
+    if (logType === '1') {
+      logtypeLabel = 'Pickup';
+    } else if (logType === '2') {
+      logtypeLabel = 'Delivered';
+    } else if (logType === '3') {
+      logtypeLabel = 'Rescheduled';
+    } else if (logType === '4') {
+      logtypeLabel = 'Return in progress';
+    } else if (logType === '5') {
+      logtypeLabel = 'Returned';
+    }
+
+    return logtypeLabel;
+  }
+
   CancelJob(event, jobId) {
     if (confirm("Are you sure you want to cancel this job?")) {
       this.clientService.cancelJob(jobId).subscribe(

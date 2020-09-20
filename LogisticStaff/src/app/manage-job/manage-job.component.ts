@@ -68,7 +68,6 @@ export class ManageJobComponent implements OnInit {
   }
 
   updateStatus(objJob, status) {
-    debugger;
     this.manageJobService.updateStatus(objJob, status).subscribe(
       (res: any) => {
         console.log(res);
@@ -136,6 +135,7 @@ export class ManageJobComponent implements OnInit {
 
     if (response['status']) {
       this.toastr.success('', 'Job returned successfully!');
+      this.clearReturnSignature();
       this.manageJobService.bindDashboard();
     }
   }
@@ -256,7 +256,7 @@ export class ManageJobComponent implements OnInit {
     };
   }
 
-  unableToDeliverJob(e, objJob) {
+  unableToDeliverJob(e, objJob, title) {
     this._objclientJobMaster = {
       item_id: objJob.item_id,
       assign_date: objJob.assign_date,
@@ -272,7 +272,7 @@ export class ManageJobComponent implements OnInit {
       job_status: objJob.job_status,
       id: objJob.id,
       staff_id: objJob.staff_id,
-      modalPopupTitle: 'Unable to deliver Job Details'
+      modalPopupTitle: title
     };
   }
 

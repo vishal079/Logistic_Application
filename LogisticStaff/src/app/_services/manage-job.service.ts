@@ -32,25 +32,27 @@ export class ManageJobService {
             const currentJob = res.data[index];
             let deliveredItems = 0;
             let rescheduledItems = 0;
-            let cancelledItems = 0;
+            let returnInProgressItems = 0;
+            let returnedItems = 0;
             for (let locationIndex = 0; locationIndex < res.data[index].deliveryLocation.length; locationIndex++) {
               res.data[index].deliveryLocation[locationIndex].isSelected = false;
               const deliveryLocationDetails = res.data[index].deliveryLocation[locationIndex];
 
               if (deliveryLocationDetails.delivery_status === '2') {
                 deliveredItems++;
-              }
-              if (deliveryLocationDetails.delivery_status === '3') {
+              } else if (deliveryLocationDetails.delivery_status === '3') {
                 rescheduledItems++;
-              }
-              if (deliveryLocationDetails.delivery_status === '4') {
-                cancelledItems++;
-                console.log('cancelledItems:', cancelledItems);
+              } else if (deliveryLocationDetails.delivery_status === '4') {
+                returnInProgressItems++;
+                console.log('returnInProgressItems:', returnInProgressItems);
+              } else if (deliveryLocationDetails.delivery_status === '5') {
+                returnedItems++;
+                console.log('returnedItems:', returnedItems);
               }
             }
 
             res.data[index].jobStatusDetails = {};
-            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, cancelledItems };
+            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, returnInProgressItems, returnedItems };
           }
           this.listClientJob = res.data;
           console.log('this.listClientJob 55', this.listClientJob);
@@ -72,25 +74,28 @@ export class ManageJobService {
             console.log('currentJob ', currentJob);
             let deliveredItems = 0;
             let rescheduledItems = 0;
-            let cancelledItems = 0;
+            let returnInProgressItems = 0;
+            let returnedItems = 0;
+
             for (let locationIndex = 0; locationIndex < res.data[index].deliveryLocation.length; locationIndex++) {
               res.data[index].deliveryLocation[locationIndex].isSelected = false;
               const deliveryLocationDetails = res.data[index].deliveryLocation[locationIndex];
 
-              console.log('deliveryLocationDetails: ', deliveryLocationDetails);
               if (deliveryLocationDetails.delivery_status === '2') {
                 deliveredItems++;
               } else if (deliveryLocationDetails.delivery_status === '3') {
                 rescheduledItems++;
               } else if (deliveryLocationDetails.delivery_status === '4') {
-                cancelledItems++;
-                console.log('cancelledItems:', cancelledItems);
+                returnInProgressItems++;
+                console.log('returnInProgressItems:', returnInProgressItems);
+              } else if (deliveryLocationDetails.delivery_status === '5') {
+                returnedItems++;
+                console.log('returnedItems:', returnedItems);
               }
             }
 
             res.data[index].jobStatusDetails = {};
-            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, cancelledItems };
-            console.log('res.data[index].jobStatusDetails: ', res.data[index].jobStatusDetails);
+            res.data[index].jobStatusDetails = { deliveredItems, rescheduledItems, returnInProgressItems, returnedItems };
           }
           this.listClientJob = res.data;
           console.log('this.listClientJob1', this.listClientJob);

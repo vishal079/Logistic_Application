@@ -183,6 +183,32 @@
                             <span *ngIf="client.job_status == 5;">
                                 Cancelled
                             </span>
+                            <span *ngIf="client.job_status == 6;">
+                                Return In Progress
+
+                            </span>
+                            <span *ngIf="client.job_status == 7;">
+                                Returned
+                            </span>
+                            <br>
+                            <div *ngIf="client.is_multi_location_delivery === '1'">
+                                <span *ngIf="client.jobStatusDetails.deliveredItems">
+                                    Delivered: {{client.jobStatusDetails.deliveredItems}}
+                                </span>
+                                <br>
+                                <span *ngIf="client.jobStatusDetails.rescheduledItems">
+                                    Rescheduled: {{client.jobStatusDetails.rescheduledItems}}
+                                </span>
+                                <br>
+                                <span *ngIf="client.jobStatusDetails.returnInProgressItems">
+                                    Return In Progress: {{client.jobStatusDetails.returnInProgressItems}}
+                                </span>
+                                <br>
+                                <span *ngIf="client.jobStatusDetails.returnedItems">
+                                    Returned: {{client.jobStatusDetails.returnedItems}}
+                                </span>
+                            </div>
+
                         </td>
                         <td>
                             <span *ngIf="client.is_multi_location_delivery == 1">Yes</span>
@@ -199,26 +225,30 @@
                                     Decline
                                 </button>
                             </div>
-                            <button *ngIf="client.job_status == 1 && client.is_accept == 1" type="button"
-                                class="btn btn-primary btn-sm" style="width: 65px;" data-toggle="modal"
-                                data-target="#signatureModal" (click)="pickup_Delivery_Job($event, client, true)">
-                                Pickup
-                            </button>
-                            <button *ngIf="client.job_status == 3 || client.job_status == 2;" type="button"
-                                class="btn btn-primary btn-sm" (click)="unableToDeliverJob($event, client)"
-                                data-toggle="modal" data-target="#unableToDeliverJobModal" style="width: 65px;">
-                                Unable to deliver
-                            </button>
-                            <button *ngIf="client.job_status == 3 || client.job_status == 2;" type="button"
-                                class="btn btn-primary btn-sm" (click)="unableToDeliverJob($event, client)"
-                                data-toggle="modal" data-target="#returnJobModal" style="width: 65px;">
-                                Return
-                            </button>
-                            <button *ngIf="client.job_status == 3 || client.job_status == 2;" type="button"
-                                class="btn btn-primary btn-sm" (click)="pickup_Delivery_Job($event, client, false)"
-                                data-toggle="modal" data-target="#signatureModal" style="width: 65px;">
-                                Deliver
-                            </button>
+                            <ng-container *ngIf="client.job_status !== '4' && client.job_status !== '7' ">
+                                <button *ngIf="client.job_status == 1 && client.is_accept == 1" type="button"
+                                    class="btn btn-primary btn-sm" style="width: 65px;" data-toggle="modal"
+                                    data-target="#signatureModal" (click)="pickup_Delivery_Job($event, client, true)">
+                                    Pickup
+                                </button>
+                                <button *ngIf="client.job_status >= 2;" type="button" class="btn btn-primary btn-sm"
+                                    (click)="unableToDeliverJob($event, client, 'Unable to deliver Job Details')"
+                                    data-toggle="modal" data-target="#unableToDeliverJobModal" style="width: 65px;">
+                                    Unable to deliver
+                                </button>
+                                <button *ngIf="client.jobStatusDetails.returnInProgressItems > 0;" type="button"
+                                    class="btn btn-primary btn-sm"
+                                    (click)="unableToDeliverJob($event, client, 'Return Job Details')"
+                                    data-toggle="modal" data-target="#returnJobModal" style="width: 65px;">
+                                    Return
+                                </button>
+                                <button *ngIf="client.job_status == 3 || client.job_status == 2;" type="button"
+                                    class="btn btn-primary btn-sm" (click)="pickup_Delivery_Job($event, client, false)"
+                                    data-toggle="modal" data-target="#signatureModal" style="width: 65px;">
+                                    Deliver
+                                </button>
+                            </ng-container>
+
                             <button *ngIf="client.job_status == 1 && client.is_accept == 1" type="button"
                                 style="margin-left: 1%;width: 65px;" class="btn btn-primary btn-sm"
                                 (click)="AcceptJob($event, client, 2)">
@@ -276,6 +306,7 @@
                                 <th>Postal Code</th>
                                 <th>Staff Picked-up DateTime</th>
                                 <th>Staff Delivery DateTime</th>
+                                <th>Status</th>
                                 <th *ngIf="!_objclientJobMaster.isPickup"></th>
                             </thead>
                             <tbody>
@@ -287,8 +318,28 @@
                                     <td>{{deliveryLoc.postal_code}}</td>
                                     <td>{{deliveryLoc.staff_pick_up_date}}</td>
                                     <td>{{deliveryLoc.staff_delivery_date}} </td>
+                                    <td>
+                                        <span *ngIf="deliveryLoc.delivery_status == 0;">
+                                            Not pickup
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 1;">
+                                            Picked up
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 2;">
+                                            Delivered
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 3;">
+                                            Reschedule
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 4;">
+                                            Return in progress
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 5;">
+                                            Returned
+                                        </span>
+                                    </td>
                                     <td *ngIf="!_objclientJobMaster.isPickup">
-                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status != 2">
+                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status == 1">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1"
                                                 name="isSelected_{{deliveryLoc.id}}" #isSelected="ngModel"
                                                 [(ngModel)]="deliveryLoc.isSelected">
@@ -382,6 +433,7 @@
                                 <th>Postal Code</th>
                                 <th>Staff Picked-up DateTime</th>
                                 <th>Staff Delivery DateTime</th>
+                                <th>Status</th>
                                 <th *ngIf="!_objclientJobMaster.isPickup"></th>
                             </thead>
                             <tbody>
@@ -393,8 +445,28 @@
                                     <td>{{deliveryLoc.postal_code}}</td>
                                     <td>{{deliveryLoc.staff_pick_up_date}}</td>
                                     <td>{{deliveryLoc.staff_delivery_date}} </td>
+                                    <td>
+                                        <span *ngIf="deliveryLoc.delivery_status == 0;">
+                                            Not pickup
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 1;">
+                                            Picked up
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 2;">
+                                            Delivered
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 3;">
+                                            Reschedule
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 4;">
+                                            Return in progress
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 5;">
+                                            Returned
+                                        </span>
+                                    </td>
                                     <td *ngIf="!_objclientJobMaster.isPickup">
-                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status != 2">
+                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status == 1">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1"
                                                 name="isSelected_{{deliveryLoc.id}}" #isSelected="ngModel"
                                                 [(ngModel)]="deliveryLoc.isSelected">
@@ -500,6 +572,7 @@
                                 <th>Postal Code</th>
                                 <th>Staff Picked-up DateTime</th>
                                 <th>Staff Delivery DateTime</th>
+                                <th>Status</th>
                                 <th *ngIf="!_objclientJobMaster.isPickup"></th>
                             </thead>
                             <tbody>
@@ -511,8 +584,28 @@
                                     <td>{{deliveryLoc.postal_code}}</td>
                                     <td>{{deliveryLoc.staff_pick_up_date}}</td>
                                     <td>{{deliveryLoc.staff_delivery_date}} </td>
+                                    <td>
+                                        <span *ngIf="deliveryLoc.delivery_status == 0;">
+                                            Not pickup
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 1;">
+                                            Picked up
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 2;">
+                                            Delivered
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 3;">
+                                            Reschedule
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 4;">
+                                            Return in progress
+                                        </span>
+                                        <span *ngIf="deliveryLoc.delivery_status == 5;">
+                                            Returned
+                                        </span>
+                                    </td>
                                     <td *ngIf="!_objclientJobMaster.isPickup">
-                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status != 2">
+                                        <div class="form-check" *ngIf="deliveryLoc.delivery_status == 4;">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1"
                                                 name="isSelected_{{deliveryLoc.id}}" #isSelected="ngModel"
                                                 [(ngModel)]="deliveryLoc.isSelected">
@@ -525,7 +618,7 @@
                     <div class="col-md-12">
 
                         <div class="mb-2">
-                            <span><u>Unable to deliver image:</u></span>
+                            <span><u>Return image:</u></span>
                         </div>
                         <div class="mb-2">
                             <!-- <input type='file' (change)="readURL($event);" multiple="true" /> -->

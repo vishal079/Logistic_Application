@@ -331,6 +331,30 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="col-md-12">&nbsp;</div>
+                        <div class="col-md-12 mb-2">
+                            <table class="table table-sm" id="tblJobMaster" width="100%" cellspacing="0">
+                                <thead style="text-align: left;">
+                                    <th style="border: 0px;width: 30%;text-align: left;">Log Type</th>
+                                    <th style="border: 0px;width: 40%;text-align: left;">Log Description</th>
+                                    <th style="border: 0px;width: 30%;text-align: left;">Created Date Time</th>
+                                </thead>
+                                <tbody style="text-align: left;">
+                                    <tr *ngFor="let deliveryLog of _objclientJobMaster.delivery_log; let i = index"
+                                        [attr.data-index]="i">
+                                        <td>
+                                            <span><b><u>{{getLogType(deliveryLog.log_type)}}</u></b></span>
+                                        </td>
+                                        <td>
+                                            <span>{{deliveryLog.description}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{deliveryLog.created_at | date : 'short'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- <div class="col-md-12 mb-2">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Print"
                                 style="margin-left: 8px;cursor: pointer;" (click)="PrintPage()">

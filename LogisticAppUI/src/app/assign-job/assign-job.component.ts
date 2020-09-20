@@ -221,9 +221,9 @@ export class AssignJobComponent implements OnInit {
       var pickup_Signs = objJob.image.filter(this.filterPickupSings);
       var delivery_Images = objJob.image.filter(this.filterDeliveryImages);
       var delivery_Signs = objJob.image.filter(this.filterDeliverySings);
-      var rescheduleImages = objJob.image.filter(this.filterRescheduleImages);
+      /* var rescheduleImages = objJob.image.filter(this.filterRescheduleImages);
       var returnImages = objJob.image.filter(this.filterReturnImages);
-      var returnSigns = objJob.image.filter(this.filterReturnSigns);
+      var returnSigns = objJob.image.filter(this.filterReturnSigns); */
 
       var pickupDetails = {
         line1: objJob.line1, city: objJob.city,
@@ -235,9 +235,9 @@ export class AssignJobComponent implements OnInit {
       for (let i = 0; i < objJob.deliveryLocation.length; i++) {
         objJob.deliveryLocation[i].deliveryImages = [];
         objJob.deliveryLocation[i].deliverySigns = [];
-        objJob.deliveryLocation[i].rescheduleImages = [];
+        /* objJob.deliveryLocation[i].rescheduleImages = [];
         objJob.deliveryLocation[i].returnImages = [];
-        objJob.deliveryLocation[i].returnSigns = [];
+        objJob.deliveryLocation[i].returnSigns = []; */
 
         for (let j = 0; j < delivery_Images.length; j++) {
           if (delivery_Images[j].job_delivery_id == objJob.deliveryLocation[i].id) {
@@ -249,21 +249,21 @@ export class AssignJobComponent implements OnInit {
             objJob.deliveryLocation[i].deliverySigns.push(delivery_Signs[j]);
           }
         }
-        for (let j = 0; j < rescheduleImages.length; j++) {
+        /* for (let j = 0; j < rescheduleImages.length; j++) {
           if (rescheduleImages[j].job_delivery_id == objJob.deliveryLocation[i].id) {
             objJob.deliveryLocation[i].deliverySigns.push(rescheduleImages[j]);
           }
-        }
-        for (let j = 0; j < returnImages.length; j++) {
+        } */
+        /* for (let j = 0; j < returnImages.length; j++) {
           if (returnImages[j].job_delivery_id == objJob.deliveryLocation[i].id) {
             objJob.deliveryLocation[i].deliverySigns.push(returnImages[j]);
           }
-        }
-        for (let j = 0; j < returnSigns.length; j++) {
+        } */
+        /* for (let j = 0; j < returnSigns.length; j++) {
           if (returnSigns[j].job_delivery_id == objJob.deliveryLocation[i].id) {
             objJob.deliveryLocation[i].deliverySigns.push(returnSigns[j]);
           }
-        }
+        } */
 
       }
     }
