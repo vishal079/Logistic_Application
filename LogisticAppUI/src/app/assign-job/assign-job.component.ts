@@ -200,11 +200,13 @@ export class AssignJobComponent implements OnInit {
     if (logType === '1') {
       logtypeLabel = 'Pickup';
     } else if (logType === '2') {
-      logtypeLabel = 'Delivery';
+      logtypeLabel = 'Delivered';
     } else if (logType === '3') {
-      logtypeLabel = 'Reschedule';
+      logtypeLabel = 'Rescheduled';
     } else if (logType === '4') {
-      logtypeLabel = 'Cancel';
+      logtypeLabel = 'Return in progress';
+    } else if (logType === '5') {
+      logtypeLabel = 'Returned';
     }
 
     return logtypeLabel;
